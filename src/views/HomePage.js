@@ -17,7 +17,7 @@ import HomePageHeader from "components/Headers/HomePageHeader.js";
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import Footer from "components/Footers/Footer.js";
 
-export default class HomePage2 extends React.Component {
+export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -69,10 +69,10 @@ export default class HomePage2 extends React.Component {
                         {/* Book lists */}
                         <Col sm="8">
                             <h3>Most popular books:</h3>
-                            <div style={{ backgroundColor: "#A9A9A9" }}>
-                                <Row style={{ width: "100%" }}>
+                            <div style={{ backgroundColor: "#A9A9A9", width: "100%", height: "310px", overflowX: "scroll", overflowY: "hidden", display: "inline-block"  }}>
+                                <Row style={{height: "310px"}}>
                                     {this.state.books.map(book =>
-                                        <Col sm="4.5">
+                                        
                                             <div style={{
                                                 margin: "10px 0px 10px 20px", // ?????????
                                                 padding: "10px",
@@ -103,7 +103,7 @@ export default class HomePage2 extends React.Component {
                                                         ADD TO CART </Button>
                                                 </div>
                                             </div>
-                                        </Col>
+                                       
                                     )}
                                 </Row>
                             </div>
