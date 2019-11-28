@@ -59,7 +59,7 @@ ReactDOM.render(
         render={props => <HomePage {...props} />}
       />
       <Route
-        path="/book-details-page"
+        path="/book-details-page/:id"
         render={props => <BookDetailsPage {...props} />}
       />
       <Redirect to="/index" />

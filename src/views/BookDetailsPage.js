@@ -6,7 +6,6 @@ import {
     InputGroupAddon,
     InputGroupText,
     InputGroup,
-    FormGroup,
     Row,
     Col,
 } from "reactstrap";
@@ -15,6 +14,7 @@ import {
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import SortSideBar from "components/Navbars/SortSideBar.js";
+import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
 import Footer from "components/Footers/Footer.js";
 
 export default class BookDetailsPage extends React.Component {
@@ -23,14 +23,32 @@ export default class BookDetailsPage extends React.Component {
 
         this.state = {
             book: [],
+            bookId: props.match.params.id,
+            reviews: []
         };
     }
 
     componentDidMount() {
-        fetch('https://bookstry20191122022423.azurewebsites.net/api/book/1')
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookId}`)
             .then(response => response.json())
             .then(data => this.setState({ book: data }));
-        console.log("DATA: " + this.state.book)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/review`)
+            .then(response => response.json())
+            .then(data => this.setState({ reviews: data }));
+    }
+
+    downloadPDF() {
+        fetch(`${this.state.book.bookPdf}`)
+        .then(response => {
+            response.blob().then(blob => {
+                let url = window.URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.href = url;
+                a.download = `${this.state.book.title}.pdf`;
+                a.click();
+            });
+        });
+
     }
 
     render() {
@@ -66,8 +84,9 @@ export default class BookDetailsPage extends React.Component {
                             <SortSideBar />
                         </Col>
 
-                        {/* Book details */}
                         <Col sm="6">
+
+                            {/* Book details */}
                             <Row>
                                 <Col sm="3">
                                     <img
@@ -87,34 +106,69 @@ export default class BookDetailsPage extends React.Component {
                                     </div>
                                 </Col>
                             </Row>
+
+                            {/* Buttons */}
                             <Row>
                                 <Col sm="12">
                                     <div style={{ float: "right", width: "480px", marginTop: "20px" }}>
                                         <Button className="btn-round mr-1" color="info" type="button">
                                             READ DEMO</Button>
-                                        <Button className="btn-round mr-1" color="default" type="button">
+                                        <Button className="btn-round mr-1" color="default" type="button" onClick={this.downloadPDF.bind(this)}>
                                             DOWNLOAD PDF</Button>
                                         <Button className="btn-round mr-1" color="danger" type="button">
                                             ADD TO CART</Button>
                                     </div>
                                 </Col>
                             </Row>
+
+                            {/* Leave a review */}
                             <Row style={{ marginTop: "50px" }}>
                                 <Col sm="12">
                                     <h4>Leave a review:</h4>
                                     <textarea
                                         style={{ marginTop: "5px", height: "100px", width: "100%", border: "1px solid #C0C0C0", padding: "5px 10px" }}
-                                        placeholder="Write your comment here ..."
+                                        placeholder="Write your review here ..."
                                         type="text"></textarea>
-                                    <Button style={{ marginTop: "8px" }} color="primary" type="button">
+                                    <Button style={{ marginTop: "8px", alignSelf: "left" }} color="primary" type="button">
                                         Publish</Button>
                                 </Col>
                             </Row>
+
+                            {/* Book reviews */}
+                            <Row style={{ marginBottom: "90px" }}>
+                                <Col sm="12">
+                                    <h4 style={{ marginTop: "150px" }}>Reviews:</h4>
+                                    {this.state.reviews.map(review =>
+                                        <Row>
+                                            <Col sm="3">
+                                                <img
+                                                    alt="..."
+                                                    className="img-circle img-no-padding img-responsive"
+                                                    style={{ width: "150px", height: "150px", marginTop: "20px", position: "absolute", zIndex: "1" }}
+                                                    src={require("assets/img/person.jpg")}
+                                                />
+                                            </Col>
+                                            <Col sm="9">
+                                                <div style={{
+                                                    margin: "20px 0px 20px -150px",
+                                                    width: "123%", height: "100%",
+                                                    padding: "5px 5px 5px 80px",
+                                                    border: "1px solid #C0C0C0"
+                                                }}>
+                                                    <h5><strong>username</strong></h5>
+                                                    <p style={{ marginTop: "15px", marginLeft: "15px" }}>{review.rText}</p>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    )}
+                                </Col>
+                            </Row>
+
                         </Col>
 
                         {/* Book suggestions */}
                         <Col sm="2">
-                            <SortSideBar />
+                            <BookSuggestionsBar />
                         </Col>
 
                         <Col sm="1">
