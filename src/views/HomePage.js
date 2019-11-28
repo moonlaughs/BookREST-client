@@ -16,6 +16,7 @@ import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import Footer from "components/Footers/Footer.js";
+import { Link } from "react-router-dom";
 
 export default class HomePage extends React.Component {
     constructor(props) {
@@ -69,41 +70,49 @@ export default class HomePage extends React.Component {
                         {/* Book lists */}
                         <Col sm="8">
                             <h3>Most popular books:</h3>
-                            <div style={{ backgroundColor: "#A9A9A9", width: "100%", height: "310px", overflowX: "scroll", overflowY: "hidden", display: "inline-block"  }}>
-                                <Row style={{height: "310px"}}>
+                            <div style={{ 
+                                backgroundColor: "#A9A9A9", 
+                                width: "100%", height: "310px", 
+                                overflowX: "scroll", overflowY: "hidden", 
+                                display: "inline-block" }}>
+                                <Row style={{ height: "310px" }}>
                                     {this.state.books.map(book =>
-                                        
-                                            <div style={{
-                                                margin: "10px 0px 10px 20px", // ?????????
-                                                padding: "10px",
-                                                borderStyle: "solid",
-                                                borderWidth: "1px",
-                                                borderRadius: "20px",
-                                                backgroundColor: "white",
-                                                width: "445px",
-                                                height: "280px"
-                                            }}>
+
+                                        <div style={{
+                                            margin: "10px 0px 10px 20px", // ?????????
+                                            padding: "10px",
+                                            borderStyle: "solid",
+                                            borderWidth: "1px",
+                                            borderRadius: "20px",
+                                            backgroundColor: "white",
+                                            width: "445px",
+                                            height: "280px"
+                                        }}>
+                                            <Link to={`/book-details-page/${book.bookId}`}>
                                                 <img
                                                     alt="..."
                                                     className="img-thumbnail img-responsive"
                                                     style={{ height: "250px", float: "left", width: "40%" }}
                                                     src={book.coverPhoto}
                                                 />
-                                                <div style={{ marginLeft: "25px", float: "left", width: "50%" }}>
+                                            </Link>
+                                            <div style={{ marginLeft: "25px", float: "left", width: "50%" }}>
+                                                <Link style={{ color: "Black" }} to={`/book-details-page/${book.bookId}`}>
                                                     <h5>{book.title}</h5>
-                                                    <p style={{ marginBottom: "120px" }}>{book.author}</p>
-                                                    <p style={{ marginBottom: "10px" }}><i className="nc-icon nc-cart-simple" /> &nbsp; {book.price}</p>
-                                                    <Button
-                                                        className="btn-round"
-                                                        style={{ width: "100%" }}
-                                                        color="primary"
-                                                        href="#pablo"
-                                                        target="_blank"
-                                                    >
-                                                        ADD TO CART </Button>
-                                                </div>
+                                                </Link>
+                                                <p style={{ marginBottom: "120px" }}>{book.author}</p>
+                                                <p style={{ marginBottom: "10px" }}><i className="nc-icon nc-cart-simple" /> &nbsp; {book.price}</p>
+                                                <Button
+                                                    className="btn-round"
+                                                    style={{ width: "100%" }}
+                                                    color="primary"
+                                                    href="#pablo"
+                                                    target="_blank"
+                                                >
+                                                    ADD TO CART </Button>
                                             </div>
-                                       
+                                        </div>
+
                                     )}
                                 </Row>
                             </div>
