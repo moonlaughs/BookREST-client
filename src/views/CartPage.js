@@ -41,7 +41,7 @@ export default class CartPage extends Component {
                     </div>
                     <Footer />
                     </div>
-            )
+            )  
         }*/
         if(orders.length === 0){
             return (
