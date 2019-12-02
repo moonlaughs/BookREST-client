@@ -28,6 +28,22 @@ export default class CartPage extends Component {
             .then(data => this.setState({ orders: data, isLoaded: true, totalPrice: data[0].totalPrice }));
     }
 
+
+    removeBookFromCart(orderId, bookId) {
+        if (window.confirm("Are you sure you want to delete this item?")) {
+            fetch("http://localhost:8000/api/bookorder/" + orderId + "/" + bookId, {
+                method: 'DELETE',
+                header: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            window.location.reload();
+        } else {
+            console.log("cancelled")
+        }
+    }
+
     render() {
         var { isLoaded, orders } = this.state;
 
@@ -43,16 +59,16 @@ export default class CartPage extends Component {
                     </div>
             )  
         }*/
-        if(orders.length === 0){
+        if (orders.length === 0) {
             return (
                 <div>
                     <HomePageNavbar />
                     <HomePageHeader />
-                    <div>
-                        <h3 style={{marginLeft: "40%", marginTop: "2%"}}>YOUR CART IS EMPTY :(</h3>
+                    <div style={{ marginLeft: "40%", marginTop: "2%" }}>
+                        <h3>YOUR CART IS EMPTY :(</h3>
                     </div>
                     <Footer />
-                    </div>
+                </div>
             )
         }
         else {
@@ -60,7 +76,7 @@ export default class CartPage extends Component {
                 <div>
                     <HomePageNavbar />
                     <HomePageHeader />
-                    <div id="cartDiv" className="main" style={{ marginLeft: "20%", marginRight: "20%" }}>
+                    <div className="main" style={{ marginLeft: "20%", marginRight: "20%" }}>
                         <Row style={{ paddingTop: "2%", borderBottom: "2px solid lightgrey", }}>
                             <Col md="8">
                                 <h3>Item</h3>
@@ -72,22 +88,22 @@ export default class CartPage extends Component {
                             </Col>
                         </Row>
                         {orders.map(item => (
-                            <Row id={item.bookId} style={{ padding: "5px", height: "120px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
+                            <Row id={item.bookId} style={{ marginTop: "5px", height: "120px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
                                 <Col md="1">
                                     <image src={item.bookCoverPhoto} style={{ width: "80px", height: "110px" }} />
                                 </Col>
-                                <Col md="3" style={{ marginTop: "15px" }}>
+                                <Col md="4" style={{ marginTop: "15px" }}>
                                     <h3><strong>{item.bookTitle}</strong></h3>
 
                                 </Col>
-                                <Col md="4" style={{ marginTop: "15px" }}>
+                                <Col md="3" style={{ marginTop: "15px" }}>
                                     <h3>{item.bookAuthor}</h3>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "15px" }}>
                                     <h3>${item.bookPrice}</h3>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "30px" }}>
-                                    <Button className="btn-round mr-1" color="neutral" type="button" style={{ color: "red" }}>Remove</Button>
+                                    <Button id={item.bookId} className="btn-link" color="danger" type="button" onClick={() => this.removeBookFromCart(item.orderId, item.bookId)}>Remove</Button>
                                 </Col>
 
                             </Row>
