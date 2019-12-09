@@ -34,6 +34,7 @@ import RegisterPage from "views/template/examples/RegisterPage.js";
 import HomePage from "views/HomePage.js";
 import BookDetailsPage from "views/BookDetailsPage.js";
 import CartPage from "views/CartPage";
+import PaymentPage from "views/PaymentPage.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -66,6 +67,10 @@ ReactDOM.render(
       <Route
         path="/cart-page/:id"
         render={props => <CartPage {...props} />}
+      />
+      <Route
+        path="/payment-page/:id"
+        render={props => <PaymentPage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
