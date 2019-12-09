@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import {
     Button,
@@ -39,19 +40,31 @@ export default class BookDetailsPage extends React.Component {
 
     downloadPDF() {
         fetch(`${this.state.book.bookPdf}`)
-        .then(response => {
-            response.blob().then(blob => {
-                let url = window.URL.createObjectURL(blob);
-                let a = document.createElement('a');
-                a.href = url;
-                a.download = `${this.state.book.title}.pdf`;
-                a.click();
+            .then(response => {
+                response.blob().then(blob => {
+                    let url = window.URL.createObjectURL(blob);
+                    let a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${this.state.book.title}.pdf`;
+                    a.click();
+                });
             });
-        });
 
     }
 
     render() {
+
+        let addBookButton;
+        if (this.state.book.price == 0) {
+            addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button">
+                ADD BOOK</Button>
+        }
+        else {
+            addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button">
+                ADD TO CART</Button>
+        }
+
+        let bookLabel = `label label-${this.state.book.genre} mr-1`;
 
         return (
             <div>
@@ -99,7 +112,7 @@ export default class BookDetailsPage extends React.Component {
                                 <Col sm="9">
                                     <div style={{ width: "90%" }}>
                                         <h3 style={{ margin: "0px" }}><strong>{this.state.book.title}</strong></h3>
-                                        <label className="label label-info mr-1" style={{ margin: "0px 0px 20px 0px" }}>{this.state.book.genre}</label>
+                                        <label className={bookLabel} style={{ margin: "0px 0px 20px 0px" }}>{this.state.book.genre}</label>
                                         <h5>{this.state.book.bookDes}</h5>
                                         <p style={{ margin: "20px 0px 0px 0px" }}><strong>Author: </strong>{this.state.book.author}</p>
                                         <p><strong>Price: </strong>{this.state.book.price}</p>
@@ -109,14 +122,21 @@ export default class BookDetailsPage extends React.Component {
 
                             {/* Buttons */}
                             <Row>
-                                <Col sm="12">
-                                    <div style={{ float: "right", width: "480px", marginTop: "20px" }}>
-                                        <Button className="btn-round mr-1" color="info" type="button">
+                                <Col sm="3" style={{ textAlign: "center" }}>
+                                    <Link style={{ color: "Black" }} to={`/book-demo-page/${this.state.book.bookId}`}>
+                                        <Button className="btn-round" color="neutral" type="button">
                                             READ DEMO</Button>
-                                        <Button className="btn-round mr-1" color="default" type="button" onClick={this.downloadPDF.bind(this)}>
+                                    </Link>
+                                </Col>
+                                <Col sm="9">
+                                    <div style={{ float: "right", width: "480px", marginTop: "20px" }}>
+                                        <Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
+                                            <Button style={{ marginLeft: "5px" }} color="primary" type="button">
+                                                READ BOOK</Button>
+                                        </Link>
+                                        <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={this.downloadPDF.bind(this)}>
                                             DOWNLOAD PDF</Button>
-                                        <Button className="btn-round mr-1" color="danger" type="button">
-                                            ADD TO CART</Button>
+                                        {addBookButton}
                                     </div>
                                 </Col>
                             </Row>
