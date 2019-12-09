@@ -77,6 +77,7 @@ export default class CartPage extends Component {
                     <HomePageNavbar />
                     <HomePageHeader />
                     <div className="main" style={{ marginLeft: "20%", marginRight: "20%" }}>
+                        <h2>Your Cart</h2>
                         <Row style={{ paddingTop: "2%", borderBottom: "2px solid lightgrey", }}>
                             <Col md="8">
                                 <h3>Item</h3>
@@ -121,7 +122,7 @@ export default class CartPage extends Component {
                                 <h3 style={{ fontWeight: "bold" }}>${orders[0].totalPrice}</h3>
                             </Col>
                             <Col md="2" style={{ marginTop: "30px" }}>
-                                <Button color="primary" size="lg">Checkout</Button>
+                                <Button href={`/payment-page/${orders[0].personId}`} color="primary" size="lg">Checkout</Button>
                             </Col>
                         </Row>
 

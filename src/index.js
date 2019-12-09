@@ -38,6 +38,7 @@ import BookDetailsPage from "views/BookDetailsPage.js";
 import ReadBookPage from "views/ReadBookPage.js";
 import BookDemoPage from "views/BookDemoPage.js";
 import CartPage from "views/CartPage";
+import PaymentPage from "views/PaymentPage.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -78,6 +79,10 @@ ReactDOM.render(
       <Route
         path="/cart-page/:id"
         render={props => <CartPage {...props} />}
+      />
+      <Route
+        path="/payment-page/:id"
+        render={props => <PaymentPage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
