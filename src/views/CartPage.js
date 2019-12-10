@@ -10,6 +10,8 @@ import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import Footer from "components/Footers/Footer.js";
 
+import PaymentButton from "./PaymentButton.js";
+
 export default class CartPage extends Component {
     constructor(props) {
         super(props);
@@ -122,7 +124,8 @@ export default class CartPage extends Component {
                                 <h3 style={{ fontWeight: "bold" }}>${orders[0].totalPrice}</h3>
                             </Col>
                             <Col md="2" style={{ marginTop: "30px" }}>
-                                <Button href={`/payment-page/${orders[0].personId}`} color="primary" size="lg">Checkout</Button>
+                                <PaymentButton/>
+                                {/*<Button href={`/payment-page/${orders[0].personId}`} color="primary" size="lg">Checkout</Button>*/}
                             </Col>
                         </Row>
 
