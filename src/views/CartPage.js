@@ -63,7 +63,7 @@ export default class CartPage extends Component {
             return (
                 <div>
                     <HomePageNavbar />
-                    <HomePageHeader />
+                    {/*<HomePageHeader />*/}
                     <div style={{ marginLeft: "40%", marginTop: "2%" }}>
                         <h3>YOUR CART IS EMPTY :(</h3>
                     </div>
