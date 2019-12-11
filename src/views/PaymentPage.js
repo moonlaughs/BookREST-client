@@ -11,13 +11,17 @@ import {
 
 export default class PaymentPage extends Component {
 
-    state = {
-        cvc: '',
-        expiry: '',
-        focus: '',
-        name: '',
-        number: '',
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            cvc: '',
+            expiry: '',
+            focus: '',
+            name: '',
+            number: '',
+        };
+    }
 
     handleInputFocus = (e) => {
         this.setState({ focus: e.target.name });
@@ -28,8 +32,6 @@ export default class PaymentPage extends Component {
 
         this.setState({ [name]: value });
     }
-
-
 
     validateNumber() {
         var myNumber = document.getElementById("number");
@@ -131,8 +133,29 @@ export default class PaymentPage extends Component {
                                                     var currentMonth = 1;//new Date().getMonth() + 1;  //later we need to change it, for now is december so it is harder
                                                     console.log(currentMonth);
                                                     if (myExpiry.value[1] > currentMonth) {
-                                                        alert("Card is valid 1")
+                                                        //alert("Card is valid 1")
                                                         //payment complete
+
+                                                        //console.log(localStorage.getItem('orderId'));
+
+                                                    const someData = {
+                                                        cardNumber: myNumber.value,
+                                                        expiryDate: myExpiry.value,
+                                                        cvc: myCvc.value
+                                                    }
+
+                                                    fetch(`http://localhost:8000/api/order/` + localStorage.getItem('orderId'), {
+                                                        method: "PUT",
+                                                        headers: {
+                                                          Accept: "application/json",
+                                                          "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(someData)
+                                                    })
+
+                                                    alert("Payment completed!");
+                                                    window.location.reload();
+
                                                     }
                                                     else {
                                                         alert("Card is Expired")
@@ -143,13 +166,80 @@ export default class PaymentPage extends Component {
                                                 }
                                             }
                                             else {
-                                                if (myExpiry.value[0] === 0 & myExpiry.value[1] < 10) {
-                                                    alert("card is Valid 2");
-                                                    //payment complete
+                                                if (myExpiry.value[0] === 0) {
+
+                                                    //console.log(localStorage.getItem('orderId'));
+
+                                                    const someData = {
+                                                        cardNumber: myNumber.value,
+                                                        expiryDate: myExpiry.value,
+                                                        cvc: myCvc.value
+                                                    }
+
+                                                    fetch(`http://localhost:8000/api/order/` + localStorage.getItem('orderId'), {
+                                                        method: "PUT",
+                                                        headers: {
+                                                          Accept: "application/json",
+                                                          "Content-Type": "application/json"
+                                                        },
+                                                        body: JSON.stringify(someData)
+                                                    })
+
+                                                    alert("Payment completed!");
+
+                                                    window.location.reload();
                                                 }
-                                                if (myExpiry.value[0] < 2 && myExpiry.value[0] !== 0 && myExpiry.value[1] < 3) {
-                                                    alert("card is valid 3");
-                                                    //payment complete
+                                                if (myExpiry.value[0] < 2) {
+                                                    //alert("card is valid 4");
+                                                    if(myExpiry.value[0] == 0){
+                                                        const someData = {
+                                                            cardNumber: myNumber.value,
+                                                            expiryDate: myExpiry.value,
+                                                            cvc: myCvc.value
+                                                        }
+    
+                                                        fetch(`http://localhost:8000/api/order/` + localStorage.getItem('orderId'), {
+                                                            method: "PUT",
+                                                            headers: {
+                                                              Accept: "application/json",
+                                                              "Content-Type": "application/json"
+                                                            },
+                                                            body: JSON.stringify(someData)
+                                                        })
+    
+                                                        alert("Payment completed!");
+    
+                                                        window.location.reload();
+                                                    }
+                                                    else if(myExpiry.value[0] == 1){
+                                                        console.log("got 1")
+                                                        if(myExpiry.value[1] > 2){
+                                                            alert("wrong expiry date")
+                                                        }
+                                                        else{
+                                                            const someData = {
+                                                                cardNumber: myNumber.value,
+                                                                expiryDate: myExpiry.value,
+                                                                cvc: myCvc.value
+                                                            }
+        
+                                                            fetch(`http://localhost:8000/api/order/` + localStorage.getItem('orderId'), {
+                                                                method: "PUT",
+                                                                headers: {
+                                                                  Accept: "application/json",
+                                                                  "Content-Type": "application/json"
+                                                                },
+                                                                body: JSON.stringify(someData)
+                                                            })
+        
+                                                            alert("Payment completed!");
+        
+                                                            window.location.reload();
+                                                        }
+                                                    }
+                                                }
+                                                else{
+                                                    alert("Wrong expiry date");
                                                 }
                                             }
                                         }
@@ -176,12 +266,10 @@ export default class PaymentPage extends Component {
         if (myNumber.value === "" || myNumber.value.length !== 16) {
             myNumber.style.borderColor = "red";
         }
+    }
 
-
-
-
-
-
+    Close(){
+        window.location.href=`/cart-page/${localStorage.getItem('personId')}`
     }
 
     render() {
@@ -259,9 +347,9 @@ export default class PaymentPage extends Component {
                         <Button
                             className="btn-link"
                             color="default"
-                            data-dismiss="modal"
                             type="button"
-                            href={`/home-page`}
+                            data-dismiss="modal"
+                            onClick={this.Close}
                         >
                             Cancel
             </Button>
