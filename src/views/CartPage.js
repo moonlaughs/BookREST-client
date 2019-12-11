@@ -18,14 +18,16 @@ export default class CartPage extends Component {
 
         this.state = {
             orders: [],
-            orderId: props.match.params.id,
+            personId: props.match.params.id,
             isLoaded: false,
-            totalPrice: 0
+            totalPrice: 0,
         };
     }
 
+    
+
     componentDidMount() {
-        fetch(`http://localhost:8000/api/orderedbooks/${this.state.orderId}`)
+        fetch(`http://localhost:8000/api/orderedbooks/${this.state.personId}`)
             .then(response => response.json())
             .then(data => this.setState({ orders: data, isLoaded: true, totalPrice: data[0].totalPrice }));
     }
@@ -48,6 +50,8 @@ export default class CartPage extends Component {
 
     render() {
         var { isLoaded, orders } = this.state;
+
+        
 
         /*if (!isLoaded) {
             return (
@@ -74,6 +78,10 @@ export default class CartPage extends Component {
             )
         }
         else {
+
+            localStorage.setItem('orderId', JSON.stringify(orders[0].orderId))
+            localStorage.setItem('personId', JSON.stringify(orders[0].personId))
+            //console.log(localStorage.getItem('orderId'));
             return (
                 <div>
                     <HomePageNavbar />
@@ -93,7 +101,7 @@ export default class CartPage extends Component {
                         {orders.map(item => (
                             <Row id={item.bookId} style={{ marginTop: "5px", height: "120px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
                                 <Col md="1">
-                                    <image src={item.bookCoverPhoto} style={{ width: "80px", height: "110px" }} />
+                                    <img src={item.bookCoverPhoto} style={{ width: "80px", height: "110px" }} />
                                 </Col>
                                 <Col md="4" style={{ marginTop: "15px" }}>
                                     <h3><strong>{item.bookTitle}</strong></h3>
