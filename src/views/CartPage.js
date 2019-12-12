@@ -27,7 +27,7 @@ export default class CartPage extends Component {
     
 
     componentDidMount() {
-        fetch(`http://localhost:8000/api/orderedbooks/${this.state.personId}`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/${this.state.personId}`)
             .then(response => response.json())
             .then(data => this.setState({ orders: data, isLoaded: true, totalPrice: data[0].totalPrice }));
     }
@@ -35,7 +35,7 @@ export default class CartPage extends Component {
 
     removeBookFromCart(orderId, bookId) {
         if (window.confirm("Are you sure you want to delete this item?")) {
-            fetch("http://localhost:8000/api/bookorder/" + orderId + "/" + bookId, {
+            fetch("https://bookstry20191122022423.azurewebsites.net/api/bookorder/" + orderId + "/" + bookId, {
                 method: 'DELETE',
                 header: {
                     'Accept': 'application/json',
@@ -69,7 +69,7 @@ export default class CartPage extends Component {
             return (
                 <div>
                     <HomePageNavbar />
-                    {/*<HomePageHeader />*/}
+                    <HomePageHeader />
                     <div style={{ marginLeft: "40%", marginTop: "2%" }}>
                         <h3>YOUR CART IS EMPTY :(</h3>
                     </div>
