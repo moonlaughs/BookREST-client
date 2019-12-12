@@ -33,6 +33,8 @@ import RegisterPage from "views/template/examples/RegisterPage.js";
 // others
 import HomePage from "views/HomePage.js";
 import BookDetailsPage from "views/BookDetailsPage.js";
+import LoginPage from "views/LoginPage.js";
+import SignupPage from "views/SignupPage.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -61,6 +63,14 @@ ReactDOM.render(
       <Route
         path="/book-details-page"
         render={props => <BookDetailsPage {...props} />}
+      />
+      <Route
+      path="/login-page"
+      render={props => <LoginPage {...props}/>}
+      />
+      <Route 
+      path="/signup-page"
+      render={props => <SignupPage {...props}/>}
       />
       <Redirect to="/index" />
     </Switch>

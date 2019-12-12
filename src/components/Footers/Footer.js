@@ -10,7 +10,7 @@ import {
 
 export default function DemoFooter() {
     return (
-        <Navbar style={{ marginTop: "50px", textAlign: "center" }} className="bg-primary" expand="lg">
+        <Navbar style={{ marginTop: "50px", textAlign: "center", paddingLeft: "540px" }} className="bg-primary" expand="lg">
             <Container>
                 <div style={{ display: "inline-block", width: "100%" }}>
                     <Nav navbar>
