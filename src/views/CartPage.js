@@ -19,8 +19,6 @@ export default class CartPage extends Component {
         this.state = {
             orders: [],
             personId: props.match.params.id,
-            isLoaded: false,
-            totalPrice: 0,
         };
     }
 
@@ -29,11 +27,13 @@ export default class CartPage extends Component {
     componentDidMount() {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/${this.state.personId}`)
             .then(response => response.json())
-            .then(data => this.setState({ orders: data, isLoaded: true, totalPrice: data[0].totalPrice }));
+            .then(data => this.setState({ orders: data}));
     }
 
 
     removeBookFromCart(orderId, bookId) {
+        console.log(orderId);
+        console.log(bookId);
         if (window.confirm("Are you sure you want to delete this item?")) {
             fetch("https://bookstry20191122022423.azurewebsites.net/api/bookorder/" + orderId + "/" + bookId, {
                 method: 'DELETE',
@@ -42,29 +42,16 @@ export default class CartPage extends Component {
                     'Content-Type': 'application/json'
                 }
             })
-            window.location.reload();
+            
         } else {
             console.log("cancelled")
         }
+        window.location.reload();
     }
 
     render() {
-        var { isLoaded, orders } = this.state;
+        var { orders } = this.state;
 
-        
-
-        /*if (!isLoaded) {
-            return (
-                <div>
-                    <HomePageNavbar />
-                    <HomePageHeader />
-                    <div>
-                        <h3>loading...</h3>
-                    </div>
-                    <Footer />
-                    </div>
-            )  
-        }*/
         if (orders.length === 0) {
             return (
                 <div>
@@ -79,9 +66,11 @@ export default class CartPage extends Component {
         }
         else {
 
+            //this.setState({totalPrice: orders[0].totalPrice});
+            //this.totalPrice = orders[0].totalPrice;
+
             localStorage.setItem('orderId', JSON.stringify(orders[0].orderId))
             localStorage.setItem('personId', JSON.stringify(orders[0].personId))
-            //console.log(localStorage.getItem('orderId'));
             return (
                 <div>
                     <HomePageNavbar />
@@ -101,7 +90,7 @@ export default class CartPage extends Component {
                         {orders.map(item => (
                             <Row id={item.bookId} style={{ marginTop: "5px", height: "120px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
                                 <Col md="1">
-                                    <img src={item.bookCoverPhoto} style={{ width: "80px", height: "110px" }} />
+                                    <img alt="" src={item.bookCoverPhoto} style={{ width: "80px", height: "110px" }} />
                                 </Col>
                                 <Col md="4" style={{ marginTop: "15px" }}>
                                     <h3><strong>{item.bookTitle}</strong></h3>
@@ -133,7 +122,6 @@ export default class CartPage extends Component {
                             </Col>
                             <Col md="2" style={{ marginTop: "30px" }}>
                                 <PaymentButton/>
-                                {/*<Button href={`/payment-page/${orders[0].personId}`} color="primary" size="lg">Checkout</Button>*/}
                             </Col>
                         </Row>
 

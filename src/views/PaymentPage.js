@@ -119,14 +119,18 @@ export default class PaymentPage extends Component {
 
     validateDate(){
         var myExpiry = document.getElementById('expiry').value;
+        var a = parseInt(myExpiry[0]);
+        var b = parseInt(myExpiry[1]);
+        var c = parseInt(myExpiry[2]);
+        var d = parseInt(myExpiry[3]);
 
         var valid = false;
 
-        if(myExpiry[2] >= 2){
-            if(myExpiry[2] === 2 && myExpiry[3] === 0){
-                if(myExpiry[0] === 0){
-                    var currentMonth = 1;//new Date().getMonth() + 1;
-                    if(myExpiry[1] > currentMonth){
+        if(c >= 2){
+            if(c === 2 && d === 0){
+                var currentMonth = 1;//new Date().getMonth() + 1;
+                if(a === 0 && b !== 0){
+                    if(b > currentMonth){
                         valid = true;
                         return valid;
                     }
@@ -134,8 +138,8 @@ export default class PaymentPage extends Component {
                         return valid;
                     }
                 }
-                else if(myExpiry[0] === 1 && myExpiry[1] < 3){
-                    if(myExpiry[1] === 0){
+                else if(a === 1 && b < 3){
+                    if(b === 0){
                         var myMonth = 10;
                         if(myMonth > currentMonth){
                             valid = true;
@@ -145,7 +149,7 @@ export default class PaymentPage extends Component {
                             return valid;
                         }
                     }
-                    else if(myExpiry[1] === 1){
+                    else if(b === 1){
                         var myMonth = 11;
                         if(myMonth > currentMonth){
                             valid = true;
@@ -155,7 +159,7 @@ export default class PaymentPage extends Component {
                             return valid;
                         }
                     }
-                    else if(myExpiry[1] === 2){
+                    else if(b === 2){
                         var myMonth = 12;
                         if(myMonth > currentMonth){
                             valid = true;
@@ -166,40 +170,41 @@ export default class PaymentPage extends Component {
                         }
                     }
                 }
-                else if(myExpiry[0] === 1 && myExpiry[1] > 2){
+                else if(a === 1 && b > 2){
                     return valid;
                 }
-                else if(myExpiry[0] > 1){
+                else if(a > 1 || (a === 0 && b === 0)){
                     return valid;
                 }
             }
             else{
-                if(myExpiry[0] === "0"){
+                if(a === 0 && b !== 0){
                     valid = true;
                     return valid;
                 }
-                else if(myExpiry[0] === 1 && myExpiry[1] < 3){
+                else if(a === 1 && b < 3){
                     valid = true;
                     return valid;
                 }
-                else if(myExpiry[0] === 1 && myExpiry[1] > 2){
+                else if(a === 1 && b > 2){
                     return valid;
                 }
-                else if(myExpiry[0] > 1){
+                else if(a > 1){
+                    return valid;
+                }
+                else if(a === 0 && b === 0){
                     return valid;
                 }
             }
         }
-        else if(myExpiry[2] < 2){
+        else if(c < 2){
             alert("card expired");
             return valid;
         }
         return valid;
     }
 
-    paymentMethod() {
-        console.log("yey");
-        /*
+    paymentMethod() {        
         const someData = {
             cardNumber: document.getElementById("number").value,
             expiryDate: document.getElementById("expiry").value,
@@ -216,14 +221,10 @@ export default class PaymentPage extends Component {
         })
 
         alert("Payment completed!");
-        window.location.reload();*/
+        window.location.reload();
     }
 
     validateData() {
-        //var myNumber = document.getElementById('number').value;
-        //var myName = document.getElementById('name').value;
-        //var myExpiry = document.getElementById('expiry').value;
-        //var myCvc = document.getElementById('cvc').value;
 
         var validNumber = this.validateNumber();
         var validName = this.validateName();
@@ -232,7 +233,7 @@ export default class PaymentPage extends Component {
         if (validNumber === true && validName === true && validExpiry === true && validCvc === true) {
             var validDate = this.validateDate();
             if(validDate === true){
-                alert("Payment complete");
+                this.paymentMethod();
             }
             else if(validDate !== true){
                 alert("Something is wrong with Expiry Date.");
@@ -241,107 +242,6 @@ export default class PaymentPage extends Component {
         else {
             alert("Please fill in the fields.");
         }
-
-        /*var myNumber = document.getElementById("number");
-        if (myNumber.value != null && myNumber.value.length === 16) {
-            if (/\D/.test(myNumber.value) === true) {
-                //non digit found
-                myNumber.style.borderColor = "red";
-            }
-            else {
-                myNumber.style.borderColor = "lightgreen";
-
-                var myName = document.getElementById("name");
-                if (myName.value != null) {
-                    if (/\d/.test(myName.value) === true) {
-                        //digit found
-                        myName.style.borderColor = "red";
-                    }
-                    else {
-                        myName.style.borderColor = "lightgreen";
-
-                        var myCvc = document.getElementById("cvc");
-                        if (myCvc.value != null && myCvc.value.length === 3) {
-                            if (/\D/.test(myCvc.value) === true) {
-                                myCvc.style.borderColor = "red";
-                            }
-                            else {
-                                myCvc.style.borderColor = "lightgreen";
-
-                                var myExpiry = document.getElementById("expiry");
-                                if (myExpiry.value != null && myExpiry.value.length === 4) {
-                                    if (/\D/.test(myExpiry.value) === true) {
-                                        myExpiry.style.borderColor = "red";
-                                    }
-                                    else {
-                                        myExpiry.style.borderColor = "lightgreen";
-                                        if (myExpiry.value[2] >= 2 && myExpiry.value[3] >= 0) {
-                                            if (myExpiry.value[2] === 2 && myExpiry.value[3] === 0) {
-                                                if (myExpiry.value[0] === 0) {
-                                                    var currentMonth = 1;//new Date().getMonth() + 1;  //later we need to change it, for now is december so it is harder
-                                                    console.log(currentMonth);
-                                                    if (myExpiry.value[1] > currentMonth) {
-
-                                                        this.paymentMethod();
-
-                                                    }
-                                                    else {
-                                                        alert("Card is Expired")
-                                                    }
-                                                }
-                                                if (myExpiry.value[0] > 1) {
-                                                    alert("Wrong expiry date");
-                                                }
-                                            }
-                                            else {
-                                                if (myExpiry.value[0] === 0) {
-
-                                                    this.paymentMethod();
-                                                }
-                                                if (myExpiry.value[0] < 2) {
-                                                    //alert("card is valid 4");
-                                                    if(myExpiry.value[0] == 0){
-
-                                                        this.paymentMethod();
-                                                    }
-                                                    else if(myExpiry.value[0] == 1){
-                                                        console.log("got 1")
-                                                        if(myExpiry.value[1] > 2){
-                                                            alert("wrong expiry date")
-                                                        }
-                                                        else{
-                                                            this.paymentMethod();
-                                                        }
-                                                    }
-                                                }
-                                                else{
-                                                    alert("Wrong expiry date");
-                                                }
-                                            }
-                                        }
-                                        else {
-                                            alert("Card is expired")
-                                        }
-                                    }
-                                }
-                                if (myExpiry.value === "" || myExpiry.value.length !== 4) {
-                                    myExpiry.style.borderColor = "red";
-                                }
-                            }
-                        }
-                        if (myCvc.value === "" || myCvc.value.length !== 3) {
-                            myCvc.style.borderColor = "red";
-                        }
-                    }
-                }
-                if (myName.value === "") {
-                    myName.style.borderColor = "red";
-                }
-            }
-        }
-        if (myNumber.value === "" || myNumber.value.length !== 16) {
-            myNumber.style.borderColor = "red";
-        }*/
     }
 
     Close() {
@@ -397,7 +297,7 @@ export default class PaymentPage extends Component {
 
                                 onKeyUp={this.validateExpiry}
                                 maxLength="4"
-                                style={{ display: "inline-block", width: "60%", marginRight: "10%" }}
+                                style={{ display: "inline-block", width: "68%", marginRight: "2%" }}
                             />
                             <Input
                                 type="tel"

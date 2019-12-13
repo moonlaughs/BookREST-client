@@ -15,7 +15,7 @@ export default function PaymentButton() {
             >
                 CheckOut
       </Button>
-            <Modal isOpen={scrollingLongContent} toggle={() => setScrollingLongContent(false)}>
+            <Modal isOpen={scrollingLongContent} toggle={() => setScrollingLongContent(false)} style={{width: "370px"}}>
                 <div className="modal-header">
                     <h3 className="modal-title" id="exampleModalLongTitle">Checkout</h3>
                     <button
@@ -28,7 +28,7 @@ export default function PaymentButton() {
                         <span aria-hidden={true}>×</span>
                     </button>
                 </div>
-                <PaymentPage />
+                <PaymentPage style={{marginRight: "0px"}} />
             </Modal>
         </>
     );
