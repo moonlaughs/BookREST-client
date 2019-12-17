@@ -211,6 +211,7 @@ export default class PaymentPage extends Component {
             cvc: document.getElementById("cvc").value
         }
 
+        //proceeds with payment
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/` + localStorage.getItem('orderId'), {
             method: "PUT",
             headers: {
@@ -218,6 +219,19 @@ export default class PaymentPage extends Component {
               "Content-Type": "application/json"
             },
             body: JSON.stringify(someData)
+        })
+        
+        const someData2 = {
+            personId: localStorage.getItem('personId')
+        }
+        //creates new order, as in new cart
+        fetch(`http://localhost:8000/api/order/`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(someData2)
         })
 
         alert("Payment completed!");

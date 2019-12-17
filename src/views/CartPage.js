@@ -22,19 +22,26 @@ export default class CartPage extends Component {
         };
     }
 
-    
+
 
     componentDidMount() {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/${this.state.personId}`)
             .then(response => response.json())
-            .then(data => this.setState({ orders: data}));
+            .then(data => this.setState({ orders: data }));
     }
 
+    getOrderId() {
+        //get new orderId
+        fetch(`http://localhost:8000/api/order/orderId/${this.state.personId}`)
+            .then(response => response.json())
+            .then(data => localStorage.setItem('orderId', data))
+    }
 
-    removeBookFromCart(orderId, bookId) {
+    removeBookFromCart(orderId, bookId, bookPrice) {
         console.log(orderId);
         console.log(bookId);
         if (window.confirm("Are you sure you want to delete this item?")) {
+            //remove book
             fetch("https://bookstry20191122022423.azurewebsites.net/api/bookorder/" + orderId + "/" + bookId, {
                 method: 'DELETE',
                 header: {
@@ -42,7 +49,23 @@ export default class CartPage extends Component {
                     'Content-Type': 'application/json'
                 }
             })
-            
+
+            //update totalPrice
+            const someData = {
+                totalPrice: bookPrice
+            }
+            fetch(`http://localhost:8000/api/order/priceUpdate/remove/` + localStorage.getItem('orderId'), {
+                method: "PUT",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(someData)
+            })
+
+
+
         } else {
             console.log("cancelled")
         }
@@ -53,6 +76,9 @@ export default class CartPage extends Component {
         var { orders } = this.state;
 
         if (orders.length === 0) {
+
+            this.getOrderId();
+
             return (
                 <div>
                     <HomePageNavbar />
@@ -65,9 +91,6 @@ export default class CartPage extends Component {
             )
         }
         else {
-
-            //this.setState({totalPrice: orders[0].totalPrice});
-            //this.totalPrice = orders[0].totalPrice;
 
             localStorage.setItem('orderId', JSON.stringify(orders[0].orderId))
             localStorage.setItem('personId', JSON.stringify(orders[0].personId))
@@ -103,7 +126,7 @@ export default class CartPage extends Component {
                                     <h3>${item.bookPrice}</h3>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "30px" }}>
-                                    <Button id={item.bookId} className="btn-link" color="danger" type="button" onClick={() => this.removeBookFromCart(item.orderId, item.bookId)}>Remove</Button>
+                                    <Button id={item.bookId} className="btn-link" color="danger" type="button" onClick={() => this.removeBookFromCart(item.orderId, item.bookId, item.bookPrice)}>Remove</Button>
                                 </Col>
 
                             </Row>
@@ -121,7 +144,7 @@ export default class CartPage extends Component {
                                 <h3 style={{ fontWeight: "bold" }}>${orders[0].totalPrice}</h3>
                             </Col>
                             <Col md="2" style={{ marginTop: "30px" }}>
-                                <PaymentButton/>
+                                <PaymentButton />
                             </Col>
                         </Row>
 
