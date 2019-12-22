@@ -57,7 +57,7 @@ export default class BookDetailsPage extends React.Component {
             orderId: localStorage.getItem('orderId'),
             bookId: myBook
         }
-        fetch(`http://localhost:8000/api/bookorder/`, {
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/bookorder/`, {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -70,7 +70,7 @@ export default class BookDetailsPage extends React.Component {
             totalPrice: myPrice
         }
 
-        fetch(`http://localhost:8000/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
             method: "PUT",
             headers: {
               Accept: "application/json",

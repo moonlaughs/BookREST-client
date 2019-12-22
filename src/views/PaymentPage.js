@@ -225,7 +225,7 @@ export default class PaymentPage extends Component {
             personId: localStorage.getItem('personId')
         }
         //creates new order, as in new cart
-        fetch(`http://localhost:8000/api/order/`, {
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/`, {
             method: "POST",
             headers: {
               Accept: "application/json",

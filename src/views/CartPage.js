@@ -32,7 +32,7 @@ export default class CartPage extends Component {
 
     getOrderId() {
         //get new orderId
-        fetch(`http://localhost:8000/api/order/orderId/${this.state.personId}`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/orderId/${this.state.personId}`)
             .then(response => response.json())
             .then(data => localStorage.setItem('orderId', data))
     }
@@ -54,7 +54,7 @@ export default class CartPage extends Component {
             const someData = {
                 totalPrice: bookPrice
             }
-            fetch(`http://localhost:8000/api/order/priceUpdate/remove/` + localStorage.getItem('orderId'), {
+            fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/remove/` + localStorage.getItem('orderId'), {
                 method: "PUT",
                 headers: {
                     Accept: "application/json",
