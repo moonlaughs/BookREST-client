@@ -17,9 +17,7 @@ export default class SignupPage extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.submituserRegistrationForm = this.submituserRegistrationForm.bind(
-      this
-    );
+    this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
   }
 
   handleChange(e) {
