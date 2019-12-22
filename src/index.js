@@ -39,6 +39,8 @@ import ReadBookPage from "views/ReadBookPage.js";
 import BookDemoPage from "views/BookDemoPage.js";
 import CartPage from "views/CartPage";
 import PaymentPage from "views/PaymentPage.js";
+import MyProfilePage from "views/MyProfilePage.js";
+import Tabs from "views/Tabs.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -83,6 +85,14 @@ ReactDOM.render(
       <Route
         path="/payment-page/:id"
         render={props => <PaymentPage {...props} />}
+      />
+      <Route
+      path="/tabs"
+      render={props => <Tabs {...props} />}
+      />
+      <Route
+      path="/my-profile/:id"
+      render={props => <MyProfilePage {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
