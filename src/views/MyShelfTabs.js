@@ -55,13 +55,7 @@ const MyShelfTabs = props => {
             <MyBookShelf />
             </TabPane>
             <TabPane tabId="2">
-              <Row>
-                <Col md="12">
-                  <Card className="card-register">
-                      <MyOrderShelf />
-                  </Card>
-                </Col>
-              </Row>
+            <MyOrderShelf />
             </TabPane>
           </TabContent>
         </div>
