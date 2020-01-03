@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 import { Button, Container, Row, Col } from "reactstrap";
 
@@ -42,10 +41,9 @@ export default class MyProfilePage extends React.Component {
       });
   }; */
 
-  componentDidMount(personId) {
+  componentDidMount() {
     fetch(
-      `https://bookstry20191122022423.azurewebsites.net/api/person/` +
-        localStorage.getItem("personId")
+      `https://bookstry20191122022423.azurewebsites.net/api/person/` + localStorage.getItem("personId")
     )
       .then(response => response.json())
       .then(data => this.setState({ person: data }));

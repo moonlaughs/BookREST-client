@@ -42,7 +42,7 @@ export default class SignupPage extends React.Component {
     }
   }
 
-  validateForm() {
+  validateForm() {  
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
