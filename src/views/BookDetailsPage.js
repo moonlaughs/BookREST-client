@@ -52,15 +52,45 @@ export default class BookDetailsPage extends React.Component {
 
     }
 
+    addToCart(myBook, myPrice){
+        const someData = {
+            orderId: localStorage.getItem('orderId'),
+            bookId: myBook
+        }
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/bookorder/`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(someData)
+        })
+
+        const someData2 = {
+            totalPrice: myPrice
+        }
+
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
+            method: "PUT",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(someData2)
+        })
+
+        alert("Book has been added to the cart!");
+    }
+
     render() {
 
         let addBookButton;
-        if (this.state.book.price == 0) {
+        if (this.state.book.price === 0) {
             addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button">
                 ADD TO MY SHELF</Button>
         }
         else {
-            addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button">
+            addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button" onClick={() => this.addToCart(this.state.bookId, this.state.book.price)}>
                 ADD TO CART</Button>
         }
 

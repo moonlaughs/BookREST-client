@@ -1,7 +1,7 @@
 .card-register {
-  background-color: #FF8F5E;
+  background-color: #fff;
   border-radius: 8px;
-  color: #fff;
+  color: #000000;
   max-width: 350px;
   margin: 20px 0 70px;
   min-height: 400px;
@@ -11,11 +11,11 @@
     margin-top: 15px;
   }
   & .card-title {
-    color: #B33C12;
+    color: #fff;
     text-align: center;
   }
   & .btn {
-    margin-top: 30px;
+    margin-top: 5px;
   }
   & .forgot {
     text-align: center;
@@ -24,4 +24,9 @@
   .input-group-text {
     border: 1px solid $white-color;
   }
+
+  .errorMsg {
+    color: $danger-color;
+  }
 }
+

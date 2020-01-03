@@ -43,6 +43,7 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
       <Container>
@@ -80,6 +81,9 @@ function IndexNavbar() {
               <NavLink
                 href="/home-page"
                 target="_blank"
+                style={{
+                  fontSize: "15px"
+                }}
               >
                 <img alt="..."
                   style={{height: "50px", width: "100px"}}
@@ -91,8 +95,7 @@ function IndexNavbar() {
               <Button
                 className="btn-round"
                 color="primary"
-                href="#pablo"
-                target="_blank"
+                href="http://localhost:3000/tabs"
               >
                 LOGIN
               </Button>
