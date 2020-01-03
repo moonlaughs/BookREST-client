@@ -3,7 +3,7 @@
     border-radius: 0;
     color: $white-color;
     padding: 10px 15px;
-    font-size: 14px;
+    font-size: 18px;
 
     & .close{
         font-size: $font-size-large;
@@ -20,7 +20,7 @@
         position: absolute;
         right: 0;
         top: 85px;
-        width: 100%;
+        width: 80%;
         z-index: 3;
     }
     .navbar:not(.navbar-transparent) &{
@@ -36,7 +36,7 @@
     }
     .alert-wrapper {
         &.message{
-            padding-right: 60px;
+            padding-right: 10px;
         }
         i{
             position: relative;
