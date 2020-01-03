@@ -34,6 +34,7 @@ import ProfilePage from "views/template/examples/ProfilePage.js";
 import RegisterPage from "views/template/examples/RegisterPage.js";
 // others
 import HomePage from "views/HomePage.js";
+import BookResultsPage from "views/BookResultsPage.js"
 import BookDetailsPage from "views/BookDetailsPage.js";
 import ReadBookPage from "views/ReadBookPage.js";
 import BookDemoPage from "views/BookDemoPage.js";
@@ -66,6 +67,10 @@ ReactDOM.render(
       <Route
         path="/home-page"
         render={props => <HomePage {...props} />}
+      />
+      <Route
+        path="/book-results-page/:genre"
+        render={props => <BookResultsPage {...props} />}
       />
       <Route
         path="/book-details-page/:id"
