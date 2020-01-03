@@ -33,7 +33,7 @@ export default class BookDetailsPage extends React.Component {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookId}`)
             .then(response => response.json())
             .then(data => this.setState({ book: data }));
-        fetch(`https://bookstry20191122022423.azurewebsites.net/api/review`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookId}/reviews`)
             .then(response => response.json())
             .then(data => this.setState({ reviews: data }));
     }
@@ -57,7 +57,7 @@ export default class BookDetailsPage extends React.Component {
         let addBookButton;
         if (this.state.book.price == 0) {
             addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button">
-                ADD BOOK</Button>
+                ADD TO MY SHELF</Button>
         }
         else {
             addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button">
@@ -146,7 +146,7 @@ export default class BookDetailsPage extends React.Component {
                                 <Col sm="12">
                                     <h4>Leave a review:</h4>
                                     <textarea
-                                        style={{ marginTop: "5px", height: "100px", width: "100%", border: "1px solid #C0C0C0", padding: "5px 10px" }}
+                                        style={{ marginTop: "5px", height: "100px", width: "95%", border: "1px solid #C0C0C0", padding: "5px 10px" }}
                                         placeholder="Write your review here ..."
                                         type="text"></textarea>
                                     <Button style={{ marginTop: "8px", alignSelf: "left" }} color="primary" type="button">
@@ -165,18 +165,18 @@ export default class BookDetailsPage extends React.Component {
                                                     alt="..."
                                                     className="img-circle img-no-padding img-responsive"
                                                     style={{ width: "150px", height: "150px", marginTop: "20px", position: "absolute", zIndex: "1" }}
-                                                    src={require("assets/img/person.jpg")}
+                                                    src={review.personUserPhoto}
                                                 />
                                             </Col>
                                             <Col sm="9">
                                                 <div style={{
-                                                    margin: "20px 0px 20px -150px",
-                                                    width: "123%", height: "100%",
+                                                    margin: "22px 0px 20px -150px",
+                                                    width: "100%", height: "120%",
                                                     padding: "5px 5px 5px 80px",
                                                     border: "1px solid #C0C0C0"
                                                 }}>
-                                                    <h5><strong>username</strong></h5>
-                                                    <p style={{ marginTop: "15px", marginLeft: "15px" }}>{review.rText}</p>
+                                                    <h5><strong>{review.personUsername}</strong></h5>
+                                                    <p style={{ marginTop: "15px", marginLeft: "15px" }}>{review.reviewText}</p>
                                                 </div>
                                             </Col>
                                         </Row>
