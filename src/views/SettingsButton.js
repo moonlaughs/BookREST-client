@@ -26,7 +26,7 @@ export default function PaymentButton() {
       <Modal className="edit-profile"
         isOpen={scrollingLongContent}
         toggle={() => setScrollingLongContent(false)}
-        style={{ width: "450px"}}
+        style={{ width: "350px"}}
         
       >
         <div className="modal-header">

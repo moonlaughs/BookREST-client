@@ -23,9 +23,10 @@ const Example = props => {
   };
 
   return (
-    <div>
+    <div style={{
+      marginTop: "5%"
+      }}>
       <Nav tabs style={{
-        marginBottom: "90px",
         justifyContent: "center"
       }}>
         <NavItem>
