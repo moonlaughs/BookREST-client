@@ -12,7 +12,7 @@ import {
     Col
   } from "reactstrap";
 
-import MyBookShelf from './MyBookShelf';
+import MyShelf from './MyShelf';
 import MyOrderShelf from './MyOrderShelf';
 
 const MyShelfTabs = props => {
@@ -52,7 +52,7 @@ const MyShelfTabs = props => {
           </Nav>
           <TabContent activeTab={activeTab} style={{marginLeft: "10%", width: "1000px"}}>
             <TabPane tabId="1">
-            <MyBookShelf />
+            <MyShelf />
             </TabPane>
             <TabPane tabId="2">
             <MyOrderShelf />

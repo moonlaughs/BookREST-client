@@ -41,7 +41,7 @@ import CartPage from "views/CartPage";
 import PaymentPage from "views/PaymentPage.js";
 import MyProfilePage from "views/MyProfilePage.js";
 import Tabs from "views/Tabs.js";
-import MyShelfTabs from 'views/MyShelfTabs';
+import MyTabs from 'views/MyTabs';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -97,7 +97,7 @@ ReactDOM.render(
       />
       <Route
       path="/my-shelf"
-      render={props => <MyShelfTabs {...props} />}
+      render={props => <MyTabs {...props} />}
       />
       <Redirect to="/index" />
     </Switch>
