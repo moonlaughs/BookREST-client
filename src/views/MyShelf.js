@@ -31,7 +31,21 @@ export default class MyBookShelf extends Component {
     render() {
 
         var { books } = this.state;
-        return (
+
+        if(books.length === 0){
+
+            //mthod to get books again?
+
+            return (
+                <Row>
+                    <Col md="12" style={{textAlign: "center"}}>
+                        <h3>Your bookshelf is empty</h3>
+                    </Col>
+                </Row>
+            )
+        }
+        else {
+            return (
                 <Row >
                     <Col md="12">
                             <div style={{ 
@@ -44,7 +58,7 @@ export default class MyBookShelf extends Component {
                                     <img
                                         alt="..."
                                         className="img-thumbnail img-responsive"
-                                        style={{ height: "190px", width: "60%", marginTop: "30px" }}
+                                        style={{ height: "190px", marginTop: "30px" }}
                                         src={item.coverPhoto}
                                     />
                                     <h5><strong>{item.bookTitle}</strong></h5>
@@ -62,5 +76,7 @@ export default class MyBookShelf extends Component {
                         </Col>
                 </Row>
         );
+        }
+        
     }
 }

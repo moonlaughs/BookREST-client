@@ -44,8 +44,11 @@ export default class LoginPage extends React.Component {
         console.log(response);
         if (response !== null) {
           if (response.type === 1) {
+
+            sessionStorage.setItem('loggedIn', JSON.stringify(1));
+
             localStorage.setItem('personId', JSON.stringify(response.personId));
-            window.location.href = `/my-profile/${localStorage.getItem('personId')}`;
+            window.location.href = `/my-profile/`//${localStorage.getItem('personId')}`;
 
           } else if (response.type === 2) {
             alert("Hello admin");

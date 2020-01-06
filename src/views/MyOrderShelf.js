@@ -30,29 +30,29 @@ export default class MyOrderShelf extends Component {
         var {ordersHistory} = this.state;
         return(
             <div>
-                <Row>
+                <Row style={{borderBottom: "2px solid lightgrey"}}>
                     <Col md="3">
-                        <h3>Order Number</h3>
+                        <h5>Order Number</h5>
                     </Col>
                     <Col md="5">
-                        <h3>Purchase Date</h3>
+                        <h5>Purchase Date</h5>
                     </Col>
                     <Col md="2">
-                        <h3>Total Price</h3>
+                        <h5>Total Price</h5>
                     </Col>
                 </Row>
                 {ordersHistory.map(item => (
-                            <Row id={item.orderId} style={{ marginTop: "5px", height: "120px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
+                            <Row id={item.orderId} style={{ marginTop: "5px", marginBottom: "10px", borderBottom: "2px solid lightgrey" }}>
                                 
                                 <Col md="3" style={{ marginTop: "15px" }}>
-                                    <h3><strong>{item.orderId}</strong></h3>
+                                    <h5><strong>{item.orderId}</strong></h5>
 
                                 </Col>
                                 <Col md="5" style={{ marginTop: "15px" }}>
-                                    <h3>{item.purchaseDate}</h3>
+                                    <h5>{item.purchaseDate}</h5>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "15px" }}>
-                                    <h3>${item.totalPrice}</h3>
+                                    <h5>${item.totalPrice}</h5>
                                 </Col>
 
                             </Row>

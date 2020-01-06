@@ -6,6 +6,7 @@ import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import Footer from "components/Footers/Footer.js";
 import SettingsButton from "views/SettingsButton.js";
+import MyTabs from "views/MyTabs";
 
 export default class MyProfilePage extends React.Component {
   constructor(props) {
@@ -87,6 +88,7 @@ export default class MyProfilePage extends React.Component {
               </Col>
             </Row>
             <br />
+            <MyTabs/>
           </Container>
         </div>
         <Footer />

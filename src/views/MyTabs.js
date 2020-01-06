@@ -50,7 +50,7 @@ const MyShelfTabs = props => {
               </NavLink>
             </NavItem>
           </Nav>
-          <TabContent activeTab={activeTab} style={{marginLeft: "10%", width: "1000px"}}>
+          <TabContent activeTab={activeTab}>{/* style={{marginLeft: "10%", width: "1000px"}}>*/}
             <TabPane tabId="1">
             <MyShelf />
             </TabPane>

@@ -204,7 +204,12 @@ export default class PaymentPage extends Component {
         return valid;
     }
 
-    paymentMethod() {        
+    paymentMethod() {   
+        
+        //add books to shelf
+        fetch(`http://localhost:8000/api/orderedbooks/addtoshelf/${localStorage.getItem("personId")}`)
+            .then(response => response.json())
+
         const someData = {
             cardNumber: document.getElementById("number").value,
             expiryDate: document.getElementById("expiry").value,

@@ -85,7 +85,7 @@ ReactDOM.render(
         render={props => <BookDemoPage {...props} />}
       />
       <Route
-        path="/cart-page/:id"
+        path="/cart-page"///:id"
         render={props => <CartPage {...props} />}
       />
       <Route
@@ -97,7 +97,7 @@ ReactDOM.render(
       render={props => <Tabs {...props} />}
       />
       <Route
-      path="/my-profile/:id"
+      path="/my-profile"///:id"
       render={props => <MyProfilePage {...props} />}
       />
       <Route

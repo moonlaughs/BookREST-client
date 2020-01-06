@@ -18,21 +18,21 @@ export default class CartPage extends Component {
 
         this.state = {
             orders: [],
-            personId: props.match.params.id,
+            //personId: props.match.params.id,
         };
     }
 
 
 
     componentDidMount() {
-        fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/${this.state.personId}`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/${localStorage.getItem("personId")}`)
             .then(response => response.json())
             .then(data => this.setState({ orders: data }));
     }
 
     getOrderId() {
         //get new orderId
-        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/orderId/${this.state.personId}`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/orderId/${localStorage.getItem("personId")}`)
             .then(response => response.json())
             .then(data => localStorage.setItem('orderId', data))
     }
@@ -93,7 +93,7 @@ export default class CartPage extends Component {
         else {
 
             localStorage.setItem('orderId', JSON.stringify(orders[0].orderId))
-            localStorage.setItem('personId', JSON.stringify(orders[0].personId))
+            //localStorage.setItem('personId', JSON.stringify(orders[0].personId))
             return (
                 <div>
                     <HomePageNavbar />
