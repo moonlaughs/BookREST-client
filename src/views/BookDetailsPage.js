@@ -82,11 +82,28 @@ export default class BookDetailsPage extends React.Component {
         alert("Book has been added to the cart!");
     }
 
+    addToShelf(myBook){
+        const someData = {
+            personId: localStorage.getItem('personId'),
+            bookId: myBook
+        }
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(someData)
+        })
+
+        alert("Book has been added to the shelf!");
+    }
+
     render() {
 
         let addBookButton;
         if (this.state.book.price === 0) {
-            addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button">
+            addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button" onClick={() => this.addToShelf(this.state.bookId)}>
                 ADD TO MY SHELF</Button>
         }
         else {

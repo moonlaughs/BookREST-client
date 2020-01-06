@@ -44,6 +44,41 @@ function IndexNavbar() {
     };
   });
 
+  let loginButton;
+  if(sessionStorage.getItem("loggedIn") === "1"){
+    loginButton = <>
+    <Button
+    className="btn-round"
+    color="primary"
+    href="http://localhost:3000/my-profile"
+  >
+    MY PROFILE
+  </Button>
+  <Button
+  className="btn-round"
+  color="primary"
+  href="http://localhost:3000/cart-page"
+  >MY CART</Button>
+  
+  <Button
+  className="btn-round"
+  color="primary"
+  href="http://localhost:3000/home-page"
+  onClick={() => sessionStorage.setItem("loggedIn", 0)}
+  >LOG OUT</Button>
+  </>
+  
+  }
+  else{
+    loginButton = <Button
+    className="btn-round"
+    color="primary"
+    href="http://localhost:3000/tabs"
+  >
+    LOGIN
+  </Button>
+}
+
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
       <Container>
@@ -92,13 +127,14 @@ function IndexNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <Button
+              {loginButton}
+              {/*<Button
                 className="btn-round"
                 color="primary"
                 href="http://localhost:3000/tabs"
               >
                 LOGIN
-              </Button>
+              </Button>*/}
             </NavItem>
           </Nav>
         </Collapse>
