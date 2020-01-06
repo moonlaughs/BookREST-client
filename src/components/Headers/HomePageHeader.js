@@ -10,7 +10,7 @@ function IndexHeader() {
           backgroundImage:
             "url(" + require("assets/img/books-cover-summer.jpg") + ")",
           marginTop: "100px",
-          minHeight: "600px"
+          minHeight: "400px"
         }}
       >
       </div>

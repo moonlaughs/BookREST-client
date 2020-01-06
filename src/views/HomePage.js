@@ -71,10 +71,10 @@ export default class HomePage extends React.Component {
                         <Col sm="8">
                             <h3>Most popular books:</h3>
                             <div style={{ 
-                                backgroundColor: "#A9A9A9", 
+                                backgroundColor: "lightgrey", 
                                 width: "100%", height: "310px", 
                                 overflowX: "scroll", //overflowY: "hidden", 
-                                display: "inline-block" }}>
+                                display: "inline-block",}}>
                                 <Row style={{ height: "310px" }}>
                                     {this.state.books.map(book =>
 

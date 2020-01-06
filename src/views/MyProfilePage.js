@@ -25,23 +25,6 @@ export default class MyProfilePage extends React.Component {
     });
   };
 
- /* onClickHandler = () => {
-    const data = new FormData();
-    data.append("file", this.state.selectedFile);
-    axios
-      .post(
-        "https://booksstoragepdf.blob.core.windows.net/userprofilephotos/",
-        data,
-        {
-          // receive two    parameter endpoint url ,form data
-        }
-      )
-      .then(res => {
-        // then print response status
-        console.log(res.statusText);
-      });
-  }; */
-
   componentDidMount() {
     fetch(
       `https://bookstry20191122022423.azurewebsites.net/api/person/` + localStorage.getItem("personId")
@@ -69,14 +52,14 @@ export default class MyProfilePage extends React.Component {
               </div>
               <br></br>
 
-              <input type="file" name="file" onChange={this.onChangeHandler} />
+              {/*<input type="file" name="file" onChange={this.onChangeHandler} />
               <Button
                 type="submit"
                 className="btn-link"
                 onClick={this.onClickHandler}
               >
                 Upload
-              </Button>
+              </Button>*/}
 
               <div className="name">
                 <h4 className="title">{person.username}</h4>
