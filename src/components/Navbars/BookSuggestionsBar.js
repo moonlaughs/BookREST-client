@@ -27,7 +27,7 @@ export default function BookSuggestionsBar() {
                         <h4>Suggestions:</h4>
                         <div style={{ backgroundColor: "#fff", marginTop: "10px", borderLeft: "1px solid lightgrey" }}>
                             {data.map(suggestedBook =>
-                                <Link to={`/book-details-page/${suggestedBook.bookId}`}>
+                                <Link  onClick={e => window.location.href(`/book-details-page/${suggestedBook.bookId}`)}>
                                     <div style={{ textAlign: "center" }}>
                                         <img
                                             alt="..."
