@@ -29,6 +29,25 @@ export default class BookshelfPage extends Component {
             .then(data => this.setState({ books: data }));
     }
 
+    downloadPDF(myBook) {
+
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${myBook}`)
+            .then(response => response.json())
+            .then(data => {
+                fetch(`${data.bookPdf}`)
+            .then(response => {
+                response.blob().then(blob => {
+                    let url = window.URL.createObjectURL(blob);
+                    let a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${data.bookTitle}.pdf`;
+                    a.click();
+                });
+            });
+            });
+
+    }
+
     render() {
         var { books } = this.state;
 
@@ -54,24 +73,28 @@ export default class BookshelfPage extends Component {
                     <div className="main" style={{ marginLeft: "10%", marginRight: "10%" }}>
                         <h3><strong>Your Bookshelf</strong></h3>
                         <Row>
-                                {books.map(item => (
-                            <div style={{ textAlign: "center", width: "250px", borderBottom: "1px solid lightgrey", paddingBottom: "30px" }}>
+                            {books.map(item => (
+                                <div style={{ textAlign: "center", width: "250px", borderBottom: "1px solid lightgrey", paddingBottom: "30px" }}>
                                     <img
                                         alt="..."
                                         className="img-thumbnail img-responsive"
                                         style={{ height: "190px", marginTop: "30px" }}
                                         src={item.coverPhoto}
                                     />
-                                    <h5 style={{height: "50px"}}><strong>{item.bookTitle}</strong></h5>
+                                    <h5 style={{ height: "50px" }}><strong>{item.bookTitle}</strong></h5>
                                     <hr style={{ backgroundColor: "#E8E8E8", margin: "0px 25px 15px 25px" }} />
-                                    <Link style={{ color: "Black" }} to={`/read-book-page/${item.bookId}`}>
+                                    <div style={{ textAlign: "center" }}>
+                                        <Link style={{ color: "Black", display: "inline-block" }} to={`/read-book-page/${item.bookId}`}>
                                             <Button style={{ marginLeft: "5px" }} color="primary" type="button">
                                                 READ</Button>
                                         </Link>
+                                        <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={() => this.downloadPDF(item.bookId)}>
+                                            DOWNLOAD PDF</Button>
+                                    </div>
                                 </div>
 
-                        ))}
-                                </Row>
+                            ))}
+                        </Row>
 
                     </div>
                     <Footer />

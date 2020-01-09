@@ -30,6 +30,8 @@ export default class DeleteAccount extends React.Component {
           }
         }
       );
+
+      sessionStorage.setItem("loggedIn", 0);
     } else {
       console.log("cancelled");
     }
@@ -44,7 +46,7 @@ export default class DeleteAccount extends React.Component {
 
     return (
       <Card className="card-register">
-        <p>
+        <p style={{marginBottom: "50px"}}>
           By clicking "Delete account permanately", you aggree to the following:
           Your account and all related orders and books will be deleted. Keep in
           mind that if you do so, you will no longer have access to your account

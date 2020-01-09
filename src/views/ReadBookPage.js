@@ -71,7 +71,7 @@ export default class ReadBookPage extends Component {
                                     onLoadSuccess={this.onDocumentLoadSuccess}
                                 >
                                     <Page pageNumber={pageNumber} width="950" />
-                                </Document>
+                              </Document> 
                             </div>
                             <div style={{ textAlign: "center" }}>
                                 <p>
@@ -102,8 +102,6 @@ export default class ReadBookPage extends Component {
                     </Col>
                 </Row>
             </div>
-
-
         );
     }
 }

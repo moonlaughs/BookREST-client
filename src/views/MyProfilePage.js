@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Button, Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import Footer from "components/Footers/Footer.js";
-import SettingsButton from "views/SettingsButton.js";
 import MyTabs from "views/MyTabs";
+import EditProfile from "./EditProfile";
 
 export default class MyProfilePage extends React.Component {
   constructor(props) {
@@ -51,25 +51,15 @@ export default class MyProfilePage extends React.Component {
                 />
               </div>
               <br></br>
-
-              {/*<input type="file" name="file" onChange={this.onChangeHandler} />
-              <Button
-                type="submit"
-                className="btn-link"
-                onClick={this.onClickHandler}
-              >
-                Upload
-              </Button>*/}
-
               <div className="name">
                 <h4 className="title">{person.username}</h4>
               </div>
             </div>
-            <Row>
-              <Col className="ml-auto mr-auto text-center" md="6">
-                <SettingsButton></SettingsButton>
-              </Col>
-            </Row>
+            <row className="myRow">
+              <div className="editDiv">
+                <EditProfile/>
+              </div> 
+            </row>
             <br />
           </Container>
         </div>

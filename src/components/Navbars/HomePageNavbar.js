@@ -11,13 +11,12 @@ import {
   NavLink,
   Nav,
   Container,
-  ButtonGroup,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  InputGroupAddon,
-  InputGroupText
+  Row,
+  Col
 } from "reactstrap";
 
 import { Link } from "react-router-dom";
@@ -56,41 +55,39 @@ function IndexNavbar() {
   let loginButton;
   if (sessionStorage.getItem("loggedIn") === "1") {
     loginButton = <>
-      <UncontrolledDropdown>
-        <DropdownToggle
-          aria-expanded={false}
-          aria-haspopup={true}
-          caret
-          color="primary"
-          data-toggle="dropdown"
-          id="dropdownMenuButton"
-          type="button"
-        >
-          My Account
+          <UncontrolledDropdown style={{display: "inline-block"}}>
+            <DropdownToggle
+              aria-expanded={false}
+              aria-haspopup={true}
+              caret
+              color="primary"
+              data-toggle="dropdown"
+              id="dropdownMenuButton"
+              type="button"
+            >
+              My Account
         </DropdownToggle>
-        <DropdownMenu aria-labelledby="dropdownMenuButton" style={{ marginTop: "15px" }}>
-          <DropdownItem onClick={e => window.location.href("/my-bookshelf")}>
-            My Bookshelf
+            <DropdownMenu aria-labelledby="dropdownMenuButton">
+              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-bookshelf")}>
+                My Bookshelf
           </DropdownItem>
-          <DropdownItem onClick={e => window.location.href("/my-orders")}>
-            My Orders
+              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-orders")}>
+                My Orders
           </DropdownItem>
-          <DropdownItem onClick={e => window.location.href("/my-profile")}>
-            Settings
+              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-profile")}>
+                Settings
           </DropdownItem>
-          <DropdownItem href="/home-page" onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
-            Log out
+              <DropdownItem href="/home-page" onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
+                Log out
           </DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-      <Link onClick={e => window.location.href("/cart-page")}
-      >
-        <InputGroupAddon addonType="append">
-          <InputGroupText>
-            <i className="nc-icon nc-cart-simple" />
-          </InputGroupText>
-        </InputGroupAddon>
-      </Link>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          <Link onClick={e => window.location.href("/cart-page")}>
+            <img alt="..."
+              style={{ height: "30px", width: "30px", align: "center", marginLeft: "10px" }}
+              src={require("assets/img/shopping-cart.png")}
+            />
+          </Link>
     </>
 
   }
@@ -98,7 +95,7 @@ function IndexNavbar() {
     loginButton = <Button
       className="btn-round"
       color="primary"
-      href="http://localhost:3000/tabs"
+      href="/tabs"
     >
       LOGIN
   </Button>
@@ -106,55 +103,28 @@ function IndexNavbar() {
 
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
-      <Container>
-        <div className="navbar-translate">
-          <NavbarBrand
-            data-placement="bottom"
-            href="/home-page"
-            title="Knowledge is priceless!"
-          >
+
+      <Row style={{ width: "100%" }}>
+        <Col md="2" style={{ textAlign: "center" }}>
+          <Link onClick={e => window.location.href("/home-page")}>
             <img alt="..."
-              style={{ height: "50px", width: "50px" }}
+              style={{ height: "50px", width: "50px", align: "center" }}
               src={require("assets/img/Logo pic.png")}
             />
-          </NavbarBrand>
-          <button
-            aria-expanded={navbarCollapse}
-            className={classnames("navbar-toggler navbar-toggler", {
-              toggled: navbarCollapse
-            })}
-            onClick={toggleNavbarCollapse}
-          >
-            <span className="navbar-toggler-bar bar1" />
-            <span className="navbar-toggler-bar bar2" />
-            <span className="navbar-toggler-bar bar3" />
-          </button>
-        </div>
-        <Collapse
-          className="justify-content-end"
-          navbar
-          isOpen={navbarCollapse}
-        >
-          <Nav navbar>
-            <NavItem>
-              <NavLink
-                href="/home-page"
-                style={{
-                  fontSize: "15px"
-                }}
-              >
-                <img alt="..."
-                  style={{ height: "50px", width: "100px" }}
-                  src={require("assets/img/Logo name.png")}
-                />
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              {loginButton}
-            </NavItem>
-          </Nav>
-        </Collapse>
-      </Container>
+          </Link>
+        </Col>
+        <Col md="8" style={{ textAlign: "center" }}>
+          <Link onClick={e => window.location.href("/home-page")}>
+            <img alt="..."
+              style={{ height: "75px", width: "150px" }}
+              src={require("assets/img/Logo name.png")}
+            />
+          </Link>
+        </Col>
+        <Col md="2" style={{ textAlign: "center" }}>
+            {loginButton}
+        </Col>
+      </Row>
     </Navbar>
   );
 }
