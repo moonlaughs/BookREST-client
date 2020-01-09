@@ -14,6 +14,7 @@ import {
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import SearchBar from "components/Other/SearchBar.js"
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
 import Footer from "components/Footers/Footer.js";
@@ -33,7 +34,7 @@ export default class BookDetailsPage extends React.Component {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookId}`)
             .then(response => response.json())
             .then(data => this.setState({ book: data }));
-        fetch(`https://bookstry20191122022423.azurewebsites.net/api/review`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookId}/reviews`)
             .then(response => response.json())
             .then(data => this.setState({ reviews: data }));
     }
@@ -52,7 +53,7 @@ export default class BookDetailsPage extends React.Component {
 
     }
 
-    addToCart(myBook, myPrice){
+    addToCart(myBook, myPrice) {
         const someData = {
             orderId: localStorage.getItem('orderId'),
             bookId: myBook
@@ -60,8 +61,8 @@ export default class BookDetailsPage extends React.Component {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/bookorder/`, {
             method: "POST",
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
+                Accept: "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(someData)
         })
@@ -73,8 +74,8 @@ export default class BookDetailsPage extends React.Component {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
             method: "PUT",
             headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
+                Accept: "application/json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(someData2)
         })
@@ -101,22 +102,7 @@ export default class BookDetailsPage extends React.Component {
                 <HomePageNavbar />
                 <HomePageHeader />
                 <div className="main">
-                    <Row style={{ marginTop: "50px", marginBottom: "100px" }}>
-                        <Col sm="4">
-                        </Col>
-                        <Col sm="4">
-                            <InputGroup>
-                                <Input placeholder="Search" type="text" />
-                                <InputGroupAddon addonType="append">
-                                    <InputGroupText>
-                                        <i aria-hidden={true} className="fa fa-search" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                            </InputGroup>
-                        </Col>
-                        <Col sm="4">
-                        </Col>
-                    </Row>
+                    <SearchBar />
 
                     <Row>
                         <Col sm="1">
@@ -189,24 +175,24 @@ export default class BookDetailsPage extends React.Component {
                                 <Col sm="12">
                                     <h4 style={{ marginTop: "150px" }}>Reviews:</h4>
                                     {this.state.reviews.map(review =>
-                                        <Row>
+                                        <Row style={{ height: "200px"}}>
                                             <Col sm="3">
                                                 <img
                                                     alt="..."
                                                     className="img-circle img-no-padding img-responsive"
                                                     style={{ width: "150px", height: "150px", marginTop: "20px", position: "absolute", zIndex: "1" }}
-                                                    src={require("assets/img/person.jpg")}
+                                                    src={review.personUserPhoto}
                                                 />
                                             </Col>
                                             <Col sm="9">
                                                 <div style={{
-                                                    margin: "20px 0px 20px -150px",
-                                                    width: "123%", height: "100%",
+                                                    margin: "22px 0px 20px -150px",
+                                                    width: "123%", height: "72%",
                                                     padding: "5px 5px 5px 80px",
                                                     border: "1px solid #C0C0C0"
                                                 }}>
-                                                    <h5><strong>username</strong></h5>
-                                                    <p style={{ marginTop: "15px", marginLeft: "15px" }}>{review.rText}</p>
+                                                    <h5><strong>{review.personUsername}</strong></h5>
+                                                    <p style={{ marginTop: "15px", marginLeft: "15px" }}>{review.reviewText}</p>
                                                 </div>
                                             </Col>
                                         </Row>

@@ -34,6 +34,7 @@ import ProfilePage from "views/template/examples/ProfilePage.js";
 import RegisterPage from "views/template/examples/RegisterPage.js";
 // others
 import HomePage from "views/HomePage.js";
+import BookResultsPage from "views/BookResultsPage.js"
 import BookDetailsPage from "views/BookDetailsPage.js";
 import ReadBookPage from "views/ReadBookPage.js";
 import BookDemoPage from "views/BookDemoPage.js";
@@ -42,6 +43,8 @@ import PaymentPage from "views/PaymentPage.js";
 import MyProfilePage from "views/MyProfilePage.js";
 import Tabs from "views/Tabs.js";
 import MyTabs from 'views/MyTabs';
+import AboutUs from 'views/AboutUs.js';
+import ContactUs from 'views/ContactUs.js';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -68,6 +71,12 @@ ReactDOM.render(
         render={props => <HomePage {...props} />}
       />
       <Route
+        //path="/book-results-page/:genre"
+        //path={["/book-results-page", "/book-results-page/:genre"]}
+        path={["/book-results-page/:genre", "/book-results-page"]}
+        render={props => <BookResultsPage {...props} />}
+      />
+      <Route
         path="/book-details-page/:id"
         render={props => <BookDetailsPage {...props} />}
       />
@@ -88,18 +97,26 @@ ReactDOM.render(
         render={props => <PaymentPage {...props} />}
       />
       <Route
-      path="/tabs"
-      render={props => <Tabs {...props} />}
+        path="/tabs"
+        render={props => <Tabs {...props} />}
       />
       <Route
-      path="/my-profile/:id"
-      render={props => <MyProfilePage {...props} />}
+        path="/my-profile/:id"
+        render={props => <MyProfilePage {...props} />}
       />
       <Route
-      path="/my-shelf"
-      render={props => <MyTabs {...props} />}
+        path="/my-shelf"
+        render={props => <MyTabs {...props} />}
       />
-      <Redirect to="/index" />
+      <Route
+        path="/about-us"
+        render={props => <AboutUs {...props} />}
+      />
+      <Route
+        path="/contact-us"
+        render={props => <ContactUs {...props} />}
+      />
+      <Redirect to="/home-page" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

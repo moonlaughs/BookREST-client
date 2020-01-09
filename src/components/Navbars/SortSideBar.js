@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom'
 
 import {
     FormGroup,
@@ -9,6 +10,18 @@ import {
 } from "reactstrap";
 
 export default function SortSideBar() {
+
+    let history = useHistory();
+    let [isChecked, setNewState] = useState(false);
+    let [genre, setGenre] = useState("");
+
+    function handleCheckboxChange(e) {
+        setNewState(e.target.checked);
+        setGenre(e.target.value)
+        window.location.reload();
+        history.push(`/book-results-page/${e.target.value}`)
+    }
+
     return (
         <div>
             <Row>
@@ -49,83 +62,83 @@ export default function SortSideBar() {
             <Row style={{ height: "35px" }}></Row>
             <Row>
                 <Col>
-                    <Label>Cetegories:</Label>
+                    <Label>Categories:</Label>
                     <div>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Action" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Action and Adventure <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Classic" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Classic <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Crime" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Crime and Detective <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Drama" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Drama <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Fantasy" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Fantasy <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Horror" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Horror <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Humor" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Humor <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Mystery" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Mystery <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Mythology" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Mythology <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Poetry" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Poetry <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Romance" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Romance <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="ScienceFiction" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Science Fiction <span className="form-check-sign" />
                             </Label>
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
-                                <Input defaultValue="" type="checkbox" />
+                            <Input value="Suspense" type="checkbox" onChange={e => handleCheckboxChange(e)} />
                                 Suspense <span className="form-check-sign" />
                             </Label>
                         </FormGroup>

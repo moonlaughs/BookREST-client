@@ -50,11 +50,13 @@ function IndexNavbar() {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            href="/index"
-            target="_blank"
-            title="Coded by Creative Tim"
+            href="/home-page"
+            title="Knowledge is priceless!"
           >
-            LOGO
+            <img alt="..."
+              style={{ height: "50px", width: "50px" }}
+              src={require("assets/img/Logo pic.png")}
+            />
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
@@ -76,13 +78,15 @@ function IndexNavbar() {
           <Nav navbar>
             <NavItem>
               <NavLink
-                href="https://demos.creative-tim.com/paper-kit-react/#/documentation?ref=pkr-index-navbar"
-                target="_blank"
+                href="/home-page"
                 style={{
                   fontSize: "15px"
                 }}
               >
-               BookREST
+                <img alt="..."
+                  style={{ height: "50px", width: "100px" }}
+                  src={require("assets/img/Logo name.png")}
+                />
               </NavLink>
             </NavItem>
             <NavItem>
@@ -91,7 +95,7 @@ function IndexNavbar() {
                 color="primary"
                 href="http://localhost:3000/tabs"
               >
-                LOGIN
+                Login
               </Button>
             </NavItem>
           </Nav>
