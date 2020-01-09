@@ -123,7 +123,7 @@ export default class CartPage extends Component {
                                     <h3>{item.bookAuthor}</h3>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "15px" }}>
-                                    <h3>${item.bookPrice}</h3>
+                                    <h3>€{item.bookPrice}</h3>
                                 </Col>
                                 <Col md="2" style={{ marginTop: "30px" }}>
                                     <Button id={item.bookId} className="btn-link" color="danger" type="button" onClick={() => this.removeBookFromCart(item.orderId, item.bookId, item.bookPrice)}>Remove</Button>
@@ -141,7 +141,7 @@ export default class CartPage extends Component {
                                 <h3 style={{ textAlign: "right", fontWeight: "bold" }}>Total:</h3>
                             </Col>
                             <Col md="2" style={{ marginTop: "15px" }}>
-                                <h3 style={{ fontWeight: "bold" }}>${orders[0].totalPrice}</h3>
+                                <h3 style={{ fontWeight: "bold" }}>€{orders[0].totalPrice}</h3>
                             </Col>
                             <Col md="2" style={{ marginTop: "30px" }}>
                                 <PaymentButton />

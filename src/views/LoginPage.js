@@ -33,12 +33,11 @@ export default class LoginPage extends React.Component {
     this.setState({ password: e.target.value });
   };
 
- 
 
- login = () => {
+  login = () => {
     const { username, password } = this.state;
     fetch(
-      "https://bookstry20191122022423.azurewebsites.net/api/person/login/" + username + "/" + password )
+      "https://bookstry20191122022423.azurewebsites.net/api/person/login/" + username + "/" + password)
       .then(response => response.json())
       .then(response => {
         console.log(response);
@@ -48,6 +47,7 @@ export default class LoginPage extends React.Component {
             sessionStorage.setItem('loggedIn', JSON.stringify(1));
 
             localStorage.setItem('personId', JSON.stringify(response.personId));
+
             window.location.href = `/home-page/`//${localStorage.getItem('personId')}`;
 
           } else if (response.type === 2) {
@@ -63,7 +63,7 @@ export default class LoginPage extends React.Component {
         console.log(error);
         alert("Wrong username or password");
       });
-  }; 
+  };
 
   render() {
 

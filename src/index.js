@@ -43,6 +43,8 @@ import PaymentPage from "views/PaymentPage.js";
 import MyProfilePage from "views/MyProfilePage.js";
 import Tabs from "views/Tabs.js";
 import MyTabs from 'views/MyTabs';
+import OrdersHistoryPage from 'views/OrdersHistoryPage';
+import BookshelfPage from 'views/BookshelfPage';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -103,6 +105,14 @@ ReactDOM.render(
       <Route
       path="/my-shelf"
       render={props => <MyTabs {...props} />}
+      />
+      <Route
+      path="/my-orders"
+      render={props => <OrdersHistoryPage {...props} />}
+      />
+      <Route
+      path="/my-bookshelf"
+      render={props => <BookshelfPage {...props} />}
       />
       <Redirect to="/home-page" />
     </Switch>

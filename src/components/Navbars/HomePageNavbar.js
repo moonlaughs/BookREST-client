@@ -10,8 +10,17 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
+  ButtonGroup,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  InputGroupAddon,
+  InputGroupText
 } from "reactstrap";
+
+import { Link } from "react-router-dom";
 
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -45,39 +54,55 @@ function IndexNavbar() {
   });
 
   let loginButton;
-  if(sessionStorage.getItem("loggedIn") === "1"){
+  if (sessionStorage.getItem("loggedIn") === "1") {
     loginButton = <>
-    <Button
-    className="btn-round"
-    color="primary"
-    href="http://localhost:3000/my-profile"
-  >
-    MY PROFILE
-  </Button>
-  <Button
-  className="btn-round"
-  color="primary"
-  href="http://localhost:3000/cart-page"
-  >MY CART</Button>
-  
-  <Button
-  className="btn-round"
-  color="primary"
-  href="http://localhost:3000/home-page"
-  onClick={() => sessionStorage.setItem("loggedIn", 0)}
-  >LOG OUT</Button>
-  </>
-  
+      <UncontrolledDropdown>
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="primary"
+          data-toggle="dropdown"
+          id="dropdownMenuButton"
+          type="button"
+        >
+          My Account
+        </DropdownToggle>
+        <DropdownMenu aria-labelledby="dropdownMenuButton" style={{ marginTop: "15px" }}>
+          <DropdownItem onClick={e => window.location.href("/my-bookshelf")}>
+            My Bookshelf
+          </DropdownItem>
+          <DropdownItem onClick={e => window.location.href("/my-orders")}>
+            My Orders
+          </DropdownItem>
+          <DropdownItem onClick={e => window.location.href("/my-profile")}>
+            Settings
+          </DropdownItem>
+          <DropdownItem href="/home-page" onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
+            Log out
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <Link onClick={e => window.location.href("/my-cart")}
+      >
+        <InputGroupAddon addonType="append">
+          <InputGroupText>
+            <i className="nc-icon nc-cart-simple" />
+          </InputGroupText>
+        </InputGroupAddon>
+      </Link>
+    </>
+
   }
-  else{
+  else {
     loginButton = <Button
-    className="btn-round"
-    color="primary"
-    href="http://localhost:3000/tabs"
-  >
-    LOGIN
+      className="btn-round"
+      color="primary"
+      href="http://localhost:3000/tabs"
+    >
+      LOGIN
   </Button>
-}
+  }
 
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
@@ -86,13 +111,13 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/home-page"
-            target="_blank"
-            title="Coded by Creative Tim"
+            //target="_blank"
+            style={{ marginTop: "0px", paddingTop: "0px" }}
           >
             <img alt="..."
-                  style={{height: "50px", width: "50px"}}
-                  src={require("assets/img/Logo pic.png")}
-                />
+              style={{ height: "75px", width: "75px" }}
+              src={require("assets/img/Logo pic.png")}
+            />
           </NavbarBrand>
           <button
             aria-expanded={navbarCollapse}
@@ -115,26 +140,19 @@ function IndexNavbar() {
             <NavItem>
               <NavLink
                 href="/home-page"
-                target="_blank"
+                //target="_blank"
                 style={{
                   fontSize: "15px"
                 }}
               >
                 <img alt="..."
-                  style={{height: "50px", width: "100px"}}
+                  style={{ height: "100px", width: "200px" }}
                   src={require("assets/img/Logo name.png")}
                 />
               </NavLink>
             </NavItem>
             <NavItem>
               {loginButton}
-              {/*<Button
-                className="btn-round"
-                color="primary"
-                href="http://localhost:3000/tabs"
-              >
-                LOGIN
-              </Button>*/}
             </NavItem>
           </Nav>
         </Collapse>

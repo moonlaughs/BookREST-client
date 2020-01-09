@@ -207,7 +207,7 @@ export default class PaymentPage extends Component {
     paymentMethod() {   
         
         //add books to shelf
-        fetch(`http://localhost:8000/api/orderedbooks/addtoshelf/${localStorage.getItem("personId")}`)
+        fetch(`https://bookstry20191122022423.azurewebsites.net/api/orderedbooks/addtoshelf/${localStorage.getItem("personId")}`)
             .then(response => response.json())
 
         const someData = {
@@ -269,8 +269,8 @@ export default class PaymentPage extends Component {
 
     render() {
         return (
-            <div id="PaymentForm">
-                <div className="modal-body">
+            <div id="PaymentForm" style={{backgroundColor: "#fff"}}>
+                <div className="modal-body" >
                     <Row>
                         <Cards
                             cvc={this.state.cvc}
@@ -281,7 +281,7 @@ export default class PaymentPage extends Component {
                         />
                     </Row>
                     <Row>
-                        <form style={{ float: "center", marginTop: "10px" }}>
+                        <form style={{ float: "center", marginTop: "10px"}}>
                             <Input
                                 type="tel"
                                 name="number"

@@ -71,7 +71,6 @@ export default class MyProfilePage extends React.Component {
               </Col>
             </Row>
             <br />
-            <MyTabs/>
           </Container>
         </div>
         <Footer />

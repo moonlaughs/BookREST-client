@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 
 const loadBookSuggestions = async () =>
-    await fetch("https://bookstry20191122022423.azurewebsites.net/api/book")
+    await fetch("https://bookstry20191122022423.azurewebsites.net/api/book/")
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json())
 
