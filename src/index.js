@@ -102,7 +102,7 @@ ReactDOM.render(
         render={props => <Tabs {...props} />}
       />
       <Route
-        path="/my-profile/:id"
+        path="/my-profile"
         render={props => <MyProfilePage {...props} />}
       />
       <Route

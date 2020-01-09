@@ -30,6 +30,8 @@ export default class DeleteAccount extends React.Component {
           }
         }
       );
+
+      sessionStorage.setItem("loggedIn", 0);
     } else {
       console.log("cancelled");
     }

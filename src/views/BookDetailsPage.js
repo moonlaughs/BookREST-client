@@ -53,107 +53,118 @@ export default class BookDetailsPage extends React.Component {
 
     }
 
-    addToCart(myBook, myPrice){
+    addToCart(myBook, myPrice) {
 
-        if(sessionStorage.getItem("loggedIn") === "1"){
+        if (sessionStorage.getItem("loggedIn") === "1") {
             fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/orderId/${localStorage.getItem("personId")}`)
-              .then(response => response.json())
-              .then(data => localStorage.setItem('orderId', data));
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem("orderId", data);
+                    if (localStorage.getItem("orderId") !== "0") {
 
-            if(localStorage.getItem("orderId") !== "0"){
+                        //if book is already in the cart, do not add
 
-                //if book is already in the cart, do not add
-
-                const someData = {
-                    orderId: localStorage.getItem('orderId'),
-                    bookId: myBook
-                }
-
-                fetch(`https://bookstry20191122022423.azurewebsites.net/api/bookorder/`, {
-                    method: "POST",
-                    headers: {
-                      Accept: "application/json",
-                      "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(someData)
-                })
-                .then(function(response)    {
-                    console.log(response.status);
-                    if(response.status === 200){
-                        const someData2 = {
-                            totalPrice: myPrice
+                        const someData = {
+                            orderId: localStorage.getItem('orderId'),
+                            bookId: myBook
                         }
-                
-                        fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
-                            method: "PUT",
-                            headers: {
-                              Accept: "application/json",
-                              "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(someData2)
-                        })
 
-                        alert("Book has been added to the cart!");
+                        fetch(`https://bookstry20191122022423.azurewebsites.net/api/bookorder/`, {
+                            method: "POST",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(someData)
+                        })
+                            .then(function (response) {
+                                console.log(response.status);
+                                if (response.status === 200) {
+                                    const someData2 = {
+                                        totalPrice: myPrice
+                                    }
+
+                                    fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/priceUpdate/add/` + localStorage.getItem('orderId'), {
+                                        method: "PUT",
+                                        headers: {
+                                            Accept: "application/json",
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(someData2)
+                                    })
+
+                                    alert("Book has been added to the cart!");
+                                }
+                                else {
+                                    alert("Book already is in your cart")
+                                }
+                            })
                     }
-                    else{
-                        alert("Book already is in your cart")
+                    else {
+                        alert("something went wrong, please try again");
                     }
-                })
-                
-            }
-            else{
-                alert("something went wrong, please try again");
-            }
+                });
+
+
+
         }
-        else{
+        else {
             alert("In order to add to the cart you have to Log in");
         }
     }
 
 
-    addToShelf(myBook){
-        if(sessionStorage.getItem("loggedIn") === "1"){
+    addToShelf(myBook) {
+        if (sessionStorage.getItem("loggedIn") === "1") {
 
             fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook/person/${this.state.personId}`)
-            .then(response => response.json())
-            .then(data => {
-                [data].forEach(element => {
-                    if(element.bookId === myBook){
-                        alert("Book is already in your bookshelf");
-                    }
-                    else {
-
-                        const someData = {
-                            personId: localStorage.getItem('personId'),
-                            bookId: myBook
+                .then(response => response.json())
+                .then(data => {
+                    [data].forEach(element => {
+                        if (element.bookId === myBook) {
+                            alert("Book is already in your bookshelf");
                         }
-                        fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook`, {
-                            method: "POST",
-                            headers: {
-                              Accept: "application/json",
-                              "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(someData)
-                        })
-                
-                        alert("Book has been added to the shelf!");
-                    }
+                        else {
+
+                            const someData = {
+                                personId: localStorage.getItem('personId'),
+                                bookId: myBook
+                            }
+                            fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook`, {
+                                method: "POST",
+                                headers: {
+                                    Accept: "application/json",
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(someData)
+                            })
+
+                            alert("Book has been added to the shelf!");
+                        }
+                    });
                 });
-            });
         }
-        else{
+        else {
             alert("In order to add to the cart you have to Log in")
-        }        
+        }
     }
 
     render() {
 
         let addBookButton;
+        let readBook;
         if (this.state.book.price === 0) {
+            readBook = <Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
+            <Button style={{ marginLeft: "5px" }} color="primary" type="button">
+                READ BOOK</Button>
+        </Link>
             addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button" onClick={() => this.addToShelf(this.state.bookId)}>
                 ADD TO MY SHELF</Button>
         }
         else {
+            readBook = 
+            <Button style={{ marginLeft: "5px", backgroundColor: "#fff", border: "white", cursor: "default" }} disabled="true"  type="button">
+                READ BOOK</Button>
             addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button" onClick={() => this.addToCart(this.state.bookId, this.state.book.price)}>
                 ADD TO CART</Button>
         }
@@ -209,10 +220,11 @@ export default class BookDetailsPage extends React.Component {
                                 </Col>
                                 <Col sm="9">
                                     <div style={{ float: "right", width: "480px", marginTop: "20px" }}>
-                                        <Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
+                                        {readBook}
+                                        {/*<Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
                                             <Button style={{ marginLeft: "5px" }} color="primary" type="button">
                                                 READ BOOK</Button>
-                                        </Link>
+                                        </Link>*/}
                                         <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={this.downloadPDF.bind(this)}>
                                             DOWNLOAD PDF</Button>
                                         {addBookButton}
@@ -238,7 +250,7 @@ export default class BookDetailsPage extends React.Component {
                                 <Col sm="12">
                                     <h4 style={{ marginTop: "150px" }}>Reviews:</h4>
                                     {this.state.reviews.map(review =>
-                                        <Row style={{ height: "200px"}}>
+                                        <Row style={{ height: "200px" }}>
                                             <Col sm="3">
                                                 <img
                                                     alt="..."
