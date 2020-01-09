@@ -47,24 +47,24 @@ export default class ChangePassword extends React.Component {
     if (typeof fields["pass"] !== "undefined") {
       if (
         !fields["pass"].match(
-          /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+          /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
         )
       ) {
         formIsValid = false;
         errors["pass"] =
-          "*Password must contain at least 8 characters, at least one UPPERCASE and lowercase letter, at least one number and at least one symbol from @#$%&.";
+          "*Password must contain at least 6 characters, at least one UPPERCASE and lowercase letter and at least one number.";
       }
     }
 
     if (typeof fields["pass2"] !== "undefined") {
       if (
         !fields["pass2"].match(
-          /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+          /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
         )
       ) {
         formIsValid = false;
         errors["pass2"] =
-          "*Password must contain at least 8 characters, at least one UPPERCASE and lowercase letter, at least one number, at least one symbol from @#$%& and it should match the password above.";
+          "*Password must contain at least 6 characters, at least one UPPERCASE and lowercase letter, at least one number and it should match the password above.";
       }
     }
 
@@ -124,17 +124,16 @@ export default class ChangePassword extends React.Component {
     return (
       <Card className="card-register">
        
-       
         <h6>Old password</h6>
-        <Input
+        <Input className="passInput"
           type="password"
           id="oldPass"
           name="oldPass"
-          defaultValue={person.pass} // put visible/invisible sign
+          defaultValue={person.pass}
       />  
 
         <h6>New password</h6>
-        <Input
+        <Input className="passInput"
           type="password"
           placeholder="••••••••"
           id="pass"
@@ -152,6 +151,7 @@ export default class ChangePassword extends React.Component {
           name="conPass"
           value={this.state.conPass}
           onChange={this.handleChange}
+          style={{marginBottom: "50px"}}
         />
         <div className="errorMsg">{this.state.errors.pass2}</div>
 
@@ -159,7 +159,6 @@ export default class ChangePassword extends React.Component {
           block
           type="submit"
           color="success"
-          className="btn-round"
           onClick={this.confirmChangePass.bind(this)}
         >
           Change password

@@ -95,12 +95,12 @@ export default class SignupPage extends React.Component {
     if (typeof fields["pass"] !== "undefined") {
       if (
         !fields["pass"].match(
-          /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+          /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
         )
       ) {
         formIsValid = false;
         errors["pass"] =
-          "*Password must contain at least 8 characters, at least one UPPERCASE and lowercase letter, at least one number and at least one symbol from @#$%&.";
+          "*Password must contain at least 6 characters, at least one UPPERCASE and lowercase letter and at least one number.";
       }
     }
 
@@ -112,12 +112,12 @@ export default class SignupPage extends React.Component {
     if (typeof fields["pass2"] !== "undefined") {
       if (
         !fields["pass2"].match(
-          /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/
+          /^.*(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
         )
       ) {
         formIsValid = false;
         errors["pass2"] =
-          "*Password must contain at least 8 characters, at least one UPPERCASE and lowercase letter, at least one number, at least one symbol from @#$%& and it should match the password above.";
+          "*Password must contain at least 6 characters, at least one UPPERCASE and lowercase lettet, at least one number and it should match the password above.";
       }
     }
 

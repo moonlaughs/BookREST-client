@@ -1,0 +1,19 @@
+.editForm {
+    width: 250px;
+
+    & .nameInput {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    & .emailInput {
+        margin-bottom: 40px;
+        text-align: left;
+    }
+}
+
+.editDiv {
+    display: flex;
+    justify-content: center;
+}
+
