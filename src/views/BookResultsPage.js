@@ -13,52 +13,45 @@ import {
     Container
 } from "reactstrap";
 
-
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
 import Footer from "components/Footers/Footer.js";
 
-export default class BookDetailsPage extends React.Component {
+export default class BookResultsPage extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            books: [],
-            bookGenre: props.match.params.genre,
-            bookSearchKeyword: ""
+            books: []
         };
     }
 
-    componentDidMount() {
-        console.log("The genre 1 is: " + this.state.bookGenre)
-        fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.state.bookGenre}`)
+    componentDidMount() {        
+        if (this.props.match.params) {
+            fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/${this.props.match.params.genre}`)
+            .then(console.log("genre2: " + this.props.match.params.genre))
             .then(response => response.json())
             .then(data => this.setState({ books: data }));
-    }
- 
+        } 
+        if (this.props.location.state) {
+            if (this.props.location.state.bookSearchKeyword !== "") {
+                fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/search/${this.props.location.state.bookSearchKeyword}`)
+                .then(response => response.json())
+                .then(data => this.setState({ books: data }));
+            }
+        }
+    } 
+
     handleKeywordSearchChange = () => {
         fetch(`https://bookstry20191122022423.azurewebsites.net/api/book/search/${this.state.bookSearchKeyword}`)
             .then(response => response.json())
             .then(data => this.setState({ books: data }));
-        console.log("The searched word is " + this.state.bookSearchKeyword)
     }
 
     render() {
-
-          {/* let addBookButton;
-            if (this.state.book.price == 0) {
-                addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button">
-                    ADD TO MY SHELF</Button>
-            }
-            else {
-                addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button">
-                    ADD TO CART</Button>
-            } */}
-
         let noBooksAlert;
-        if (!this.state.books.length) {        
+        if (!this.state.books.length) {    
             noBooksAlert = <Alert
             className="alert-with-icon"
             color="warning"
@@ -74,8 +67,8 @@ export default class BookDetailsPage extends React.Component {
                   <i className="nc-icon nc-simple-remove" />
                 </button>
                 <div className="message">
-                  <i className="nc-icon nc-bell-55" /> There were no books found with this keyword. Try again and make sure" + 
-                   "the book's title and/or author name is spelled correctly. :)
+                  <i className="nc-icon nc-bell-55" /> There were no books found with this keyword. Try again and make sure" +
+                   "the book's title and/or author name are spelled correctly. :)
                 </div>
               </div>
             </Container>
@@ -127,7 +120,7 @@ export default class BookDetailsPage extends React.Component {
                                 <Row style={{ height: "100px", width: "100%", marginTop: "10px" }}>
                                     {noBooksAlert}
                                     {this.state.books.map(book =>
-
+                                        <Link to={`/book-details-page/${book.bookId}`}>
                                         <div style={{
                                             margin: "10px 0px 10px 20px", // ?????????
                                             padding: "10px",
@@ -135,38 +128,37 @@ export default class BookDetailsPage extends React.Component {
                                             borderWidth: "1px",
                                             borderRadius: "20px",
                                             backgroundColor: "white",
-                                            width: "445px",
-                                            height: "280px"
+                                            width: "390px",
+                                            height: "280px",
+                                            display: "inline-block"
                                         }}>
-                                            <Link to={`/book-details-page/${book.bookId}`}>
-                                                <img
-                                                    alt="..."
-                                                    className="img-thumbnail img-responsive"
-                                                    style={{ height: "250px", float: "left", width: "40%" }}
-                                                    src={book.coverPhoto}
-                                                />
-                                            </Link>
-                                            <div style={{ marginLeft: "25px", float: "left", width: "50%" }}>
-                                                <Link style={{ color: "Black" }} to={`/book-details-page/${book.bookId}`}>
-                                                    <h5>{book.title}</h5>
-                                                </Link>
-                                                <p style={{ marginBottom: "120px" }}>{book.author}</p>
-                                                <p style={{ marginBottom: "10px" }}><i className="nc-icon nc-cart-simple" /> &nbsp; {book.price}</p>
+
+                                            <img
+                                                alt="..."
+                                                className="img-thumbnail img-responsive"
+                                                style={{ height: "250px", float: "left", width: "50%" }}
+                                                src={book.coverPhoto}
+                                            />
+
+                                            <div style={{ marginLeft: "15px", float: "left", width: "45%", height: "250px", position: "relative" }}>
+                                                <h5 style={{ color: "black", fontSize: "18px", overflowWrap: "word-break" }}><strong>{book.title}</strong></h5>
+                                                <p style={{ color: "black" }}>{book.author}</p>
+                                                <p style={{ bottom: "45px", position: "absolute", color: "black", fontSize: "20px" }}><i className="nc-icon nc-cart-simple" /> &nbsp; €{book.price}</p>
                                                 <Button
                                                     className="btn-round"
-                                                    style={{ width: "100%" }}
+                                                    style={{ width: "100%", bottom: "0", position: "absolute" }}
                                                     color="primary"
                                                     href="#pablo"
                                                     target="_blank"
                                                 >
-                                                    ADD TO CART </Button>
+
+                                                    SEE DETAILS </Button>
                                             </div>
                                         </div>
-
+                                    </Link>
                                     )}
                                 </Row>
                             </div>
-
                         </Col>
 
                         {/* Book suggestions */}
@@ -183,6 +175,7 @@ export default class BookDetailsPage extends React.Component {
 
             </div>
         );
+
     }
 
 }

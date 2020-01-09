@@ -14,6 +14,7 @@ import {
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import SearchBar from "components/Other/SearchBar.js"
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
 import Footer from "components/Footers/Footer.js";
@@ -109,8 +110,8 @@ export default class BookDetailsPage extends React.Component {
         }
     }
 
-    addToShelf(myBook){
 
+    addToShelf(myBook){
         if(sessionStorage.getItem("loggedIn") === "1"){
 
             fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook/person/${this.state.personId}`)
@@ -164,22 +165,7 @@ export default class BookDetailsPage extends React.Component {
                 <HomePageNavbar />
                 <HomePageHeader />
                 <div className="main">
-                    <Row style={{ marginTop: "50px", marginBottom: "100px" }}>
-                        <Col sm="4">
-                        </Col>
-                        <Col sm="4">
-                            <InputGroup>
-                                <Input placeholder="Search" type="text" />
-                                <InputGroupAddon addonType="append">
-                                    <InputGroupText>
-                                        <i aria-hidden={true} className="fa fa-search" />
-                                    </InputGroupText>
-                                </InputGroupAddon>
-                            </InputGroup>
-                        </Col>
-                        <Col sm="4">
-                        </Col>
-                    </Row>
+                    <SearchBar />
 
                     <Row>
                         <Col sm="1">
@@ -252,7 +238,7 @@ export default class BookDetailsPage extends React.Component {
                                 <Col sm="12">
                                     <h4 style={{ marginTop: "150px" }}>Reviews:</h4>
                                     {this.state.reviews.map(review =>
-                                        <Row>
+                                        <Row style={{ height: "200px"}}>
                                             <Col sm="3">
                                                 <img
                                                     alt="..."
@@ -264,7 +250,7 @@ export default class BookDetailsPage extends React.Component {
                                             <Col sm="9">
                                                 <div style={{
                                                     margin: "22px 0px 20px -150px",
-                                                    width: "100%", height: "120%",
+                                                    width: "123%", height: "72%",
                                                     padding: "5px 5px 5px 80px",
                                                     border: "1px solid #C0C0C0"
                                                 }}>

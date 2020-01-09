@@ -111,11 +111,10 @@ function IndexNavbar() {
           <NavbarBrand
             data-placement="bottom"
             href="/home-page"
-            //target="_blank"
-            style={{ marginTop: "0px", paddingTop: "0px" }}
+            title="Knowledge is priceless!"
           >
             <img alt="..."
-              style={{ height: "75px", width: "75px" }}
+              style={{ height: "50px", width: "50px" }}
               src={require("assets/img/Logo pic.png")}
             />
           </NavbarBrand>
@@ -140,19 +139,24 @@ function IndexNavbar() {
             <NavItem>
               <NavLink
                 href="/home-page"
-                //target="_blank"
                 style={{
                   fontSize: "15px"
                 }}
               >
                 <img alt="..."
-                  style={{ height: "100px", width: "200px" }}
+                  style={{ height: "50px", width: "100px" }}
                   src={require("assets/img/Logo name.png")}
                 />
               </NavLink>
             </NavItem>
             <NavItem>
-              {loginButton}
+              <Button
+                className="btn-round"
+                color="primary"
+                href="http://localhost:3000/tabs"
+              >
+                {loginButton}
+              </Button>
             </NavItem>
           </Nav>
         </Collapse>

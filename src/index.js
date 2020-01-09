@@ -43,6 +43,8 @@ import PaymentPage from "views/PaymentPage.js";
 import MyProfilePage from "views/MyProfilePage.js";
 import Tabs from "views/Tabs.js";
 import MyTabs from 'views/MyTabs';
+import AboutUs from 'views/AboutUs.js';
+import ContactUs from 'views/ContactUs.js';
 import OrdersHistoryPage from 'views/OrdersHistoryPage';
 import BookshelfPage from 'views/BookshelfPage';
 
@@ -71,7 +73,8 @@ ReactDOM.render(
         render={props => <HomePage {...props} />}
       />
       <Route
-        path="/book-results-page/:genre"
+        //path="/book-results-page/:genre"
+        path={["/book-results-page/:genre", "/book-results-page"]}
         render={props => <BookResultsPage {...props} />}
       />
       <Route
@@ -95,16 +98,24 @@ ReactDOM.render(
         render={props => <PaymentPage {...props} />}
       />
       <Route
-      path="/tabs"
-      render={props => <Tabs {...props} />}
+        path="/tabs"
+        render={props => <Tabs {...props} />}
       />
       <Route
-      path="/my-profile"///:id"
-      render={props => <MyProfilePage {...props} />}
+        path="/my-profile/:id"
+        render={props => <MyProfilePage {...props} />}
       />
       <Route
-      path="/my-shelf"
-      render={props => <MyTabs {...props} />}
+        path="/my-shelf"
+        render={props => <MyTabs {...props} />}
+      />
+      <Route
+        path="/about-us"
+        render={props => <AboutUs {...props} />}
+      />
+      <Route
+        path="/contact-us"
+        render={props => <ContactUs {...props} />}
       />
       <Route
       path="/my-orders"

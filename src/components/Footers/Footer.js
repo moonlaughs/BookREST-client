@@ -12,10 +12,10 @@ export default function DemoFooter() {
     return (
         <Navbar style={{ marginTop: "50px", textAlign: "center" }} className="bg-primary" expand="lg">
             <Container>
-                <div style={{ display: "inline-block", width: "100%" }}>
+                <div style={{ display: "inline-block", width: "100%", paddingLeft: "10%" }}>
                     <Nav navbar>
                         <NavItem>
-                            <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                            <NavLink href="/about-us">
                                 <i
                                     aria-hidden={true}
                                     className="nc-icon nc-badge"
@@ -24,7 +24,7 @@ export default function DemoFooter() {
                       </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                            <NavLink href="/contact-us">
                                 <i
                                     aria-hidden={true}
                                     className="nc-icon nc-send"
