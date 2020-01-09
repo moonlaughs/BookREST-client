@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 
 import {
     Button,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     Row,
     Col,
 } from "reactstrap";
@@ -14,6 +10,7 @@ import {
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import DisclaimerBar from "components/Other/DisclaimerBar.js"
 import SearchBar from "components/Other/SearchBar.js"
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
@@ -26,6 +23,7 @@ export default class BookDetailsPage extends React.Component {
         this.state = {
             book: [],
             bookId: props.match.params.id,
+            reviewText: "",
             reviews: []
         };
     }
@@ -54,7 +52,6 @@ export default class BookDetailsPage extends React.Component {
     }
 
     addToCart(myBook, myPrice) {
-
         if (sessionStorage.getItem("loggedIn") === "1") {
             fetch(`https://bookstry20191122022423.azurewebsites.net/api/order/orderId/${localStorage.getItem("personId")}`)
                 .then(response => response.json())
@@ -104,9 +101,6 @@ export default class BookDetailsPage extends React.Component {
                         alert("something went wrong, please try again");
                     }
                 });
-
-
-
         }
         else {
             alert("In order to add to the cart you have to Log in");
@@ -116,7 +110,6 @@ export default class BookDetailsPage extends React.Component {
 
     addToShelf(myBook) {
         if (sessionStorage.getItem("loggedIn") === "1") {
-
             fetch(`https://bookstry20191122022423.azurewebsites.net/api/personbook/person/${this.state.personId}`)
                 .then(response => response.json())
                 .then(data => {
@@ -148,6 +141,35 @@ export default class BookDetailsPage extends React.Component {
             alert("In order to add to the cart you have to Log in")
         }
     }
+  
+  async addReview() {
+        if (sessionStorage.getItem("loggedIn") === "1") {
+            if (this.state.reviewText == "") {
+                const newReview = {
+                    personId: localStorage.getItem('personId'),
+                    bookId: this.state.bookId,
+                    rText: this.state.reviewText
+                }
+                await fetch(`https://bookstry20191122022423.azurewebsites.net/api/review`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(newReview)
+                })
+                    .then(window.location.reload())
+
+                alert("Thanks for sharing your opinion! ;)");
+            }
+            else {
+                alert("Oops! You have forgotten to write your review.");
+            }
+        }
+        else {
+            alert("In order to leave a review you have to log in ;)")
+        }
+    }
 
     render() {
 
@@ -162,7 +184,7 @@ export default class BookDetailsPage extends React.Component {
         downloadPdf = <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={this.downloadPDF.bind(this)}>
         DOWNLOAD PDF</Button>
             addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button" onClick={() => this.addToShelf(this.state.bookId)}>
-                ADD TO MY SHELF</Button>
+                ADD TO MY BOOKSHELF</Button>
         }
         else {
             addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button" onClick={() => this.addToCart(this.state.bookId, this.state.book.price)}>
@@ -175,6 +197,7 @@ export default class BookDetailsPage extends React.Component {
             <div>
                 <HomePageNavbar />
                 <HomePageHeader />
+                <DisclaimerBar />
                 <div className="main">
                     <SearchBar />
 
@@ -240,8 +263,11 @@ export default class BookDetailsPage extends React.Component {
                                     <textarea
                                         style={{ marginTop: "5px", height: "100px", width: "95%", border: "1px solid #C0C0C0", padding: "5px 10px" }}
                                         placeholder="Write your review here ..."
-                                        type="text"></textarea>
-                                    <Button style={{ marginTop: "8px", alignSelf: "left" }} color="primary" type="button">
+                                        type="text"
+                                        onChange={e => this.setState({ reviewText: e.target.value })}></textarea>
+                                    <Button style={{ marginTop: "8px", alignSelf: "left" }}
+                                        color="primary" type="button"
+                                        onClick={this.addReview.bind(this)}>
                                         Publish</Button>
                                 </Col>
                             </Row>
