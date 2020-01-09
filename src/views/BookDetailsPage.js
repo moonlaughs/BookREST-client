@@ -153,18 +153,18 @@ export default class BookDetailsPage extends React.Component {
 
         let addBookButton;
         let readBook;
+        let downloadPdf;
         if (this.state.book.price === 0) {
             readBook = <Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
             <Button style={{ marginLeft: "5px" }} color="primary" type="button">
                 READ BOOK</Button>
         </Link>
+        downloadPdf = <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={this.downloadPDF.bind(this)}>
+        DOWNLOAD PDF</Button>
             addBookButton = <Button style={{ marginLeft: "5px" }} color="success" type="button" onClick={() => this.addToShelf(this.state.bookId)}>
                 ADD TO MY SHELF</Button>
         }
         else {
-            readBook = 
-            <Button style={{ marginLeft: "5px", backgroundColor: "#fff", border: "white", cursor: "default" }} disabled="true"  type="button">
-                READ BOOK</Button>
             addBookButton = <Button style={{ marginLeft: "5px" }} color="danger" type="button" onClick={() => this.addToCart(this.state.bookId, this.state.book.price)}>
                 ADD TO CART</Button>
         }
@@ -218,15 +218,16 @@ export default class BookDetailsPage extends React.Component {
                                             READ DEMO</Button>
                                     </Link>
                                 </Col>
-                                <Col sm="9">
-                                    <div style={{ float: "right", width: "480px", marginTop: "20px" }}>
+                                <Col sm="9" style={{textAlign: "right"}}>
+                                    <div style={{ float: "right", width: "480px", marginTop: "20px", marginRight: "45px" }}>
                                         {readBook}
+                                        {downloadPdf}
                                         {/*<Link style={{ color: "Black" }} to={`/read-book-page/${this.state.book.bookId}`}>
                                             <Button style={{ marginLeft: "5px" }} color="primary" type="button">
                                                 READ BOOK</Button>
-                                        </Link>*/}
+                                        </Link>
                                         <Button style={{ marginLeft: "5px" }} color="default" type="button" onClick={this.downloadPDF.bind(this)}>
-                                            DOWNLOAD PDF</Button>
+                                            DOWNLOAD PDF</Button>*/}
                                         {addBookButton}
                                     </div>
                                 </Col>
