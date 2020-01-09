@@ -6,6 +6,7 @@ import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
 import Footer from "components/Footers/Footer.js";
 import SettingsButton from "views/SettingsButton.js";
+import MyTabs from "views/MyTabs";
 
 export default class MyProfilePage extends React.Component {
   constructor(props) {
@@ -23,23 +24,6 @@ export default class MyProfilePage extends React.Component {
       loaded: 0
     });
   };
-
- /* onClickHandler = () => {
-    const data = new FormData();
-    data.append("file", this.state.selectedFile);
-    axios
-      .post(
-        "https://booksstoragepdf.blob.core.windows.net/userprofilephotos/",
-        data,
-        {
-          // receive two    parameter endpoint url ,form data
-        }
-      )
-      .then(res => {
-        // then print response status
-        console.log(res.statusText);
-      });
-  }; */
 
   componentDidMount() {
     fetch(
@@ -68,14 +52,14 @@ export default class MyProfilePage extends React.Component {
               </div>
               <br></br>
 
-              <input type="file" name="file" onChange={this.onChangeHandler} />
+              {/*<input type="file" name="file" onChange={this.onChangeHandler} />
               <Button
                 type="submit"
                 className="btn-link"
                 onClick={this.onClickHandler}
               >
                 Upload
-              </Button>
+              </Button>*/}
 
               <div className="name">
                 <h4 className="title">{person.username}</h4>

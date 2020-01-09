@@ -45,11 +45,13 @@ import Tabs from "views/Tabs.js";
 import MyTabs from 'views/MyTabs';
 import AboutUs from 'views/AboutUs.js';
 import ContactUs from 'views/ContactUs.js';
+import OrdersHistoryPage from 'views/OrdersHistoryPage';
+import BookshelfPage from 'views/BookshelfPage';
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/index" render={props => <Index {...props} />} />
+      {/*<Route path="/index" render={props => <Index {...props} />} />*/}
       <Route
         path="/nucleo-icons"
         render={props => <NucleoIcons {...props} />}
@@ -72,7 +74,6 @@ ReactDOM.render(
       />
       <Route
         //path="/book-results-page/:genre"
-        //path={["/book-results-page", "/book-results-page/:genre"]}
         path={["/book-results-page/:genre", "/book-results-page"]}
         render={props => <BookResultsPage {...props} />}
       />
@@ -89,7 +90,7 @@ ReactDOM.render(
         render={props => <BookDemoPage {...props} />}
       />
       <Route
-        path="/cart-page/:id"
+        path="/cart-page"///:id"
         render={props => <CartPage {...props} />}
       />
       <Route
@@ -115,6 +116,14 @@ ReactDOM.render(
       <Route
         path="/contact-us"
         render={props => <ContactUs {...props} />}
+      />
+      <Route
+      path="/my-orders"
+      render={props => <OrdersHistoryPage {...props} />}
+      />
+      <Route
+      path="/my-bookshelf"
+      render={props => <BookshelfPage {...props} />}
       />
       <Redirect to="/home-page" />
     </Switch>

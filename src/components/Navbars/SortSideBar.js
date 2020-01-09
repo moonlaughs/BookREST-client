@@ -22,7 +22,7 @@ export default function SortSideBar() {
         history.push(`/book-results-page/${e.target.value}`)
     }
 
-    return (
+return (
         <div>
             <Row>
                 <Col>

@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 
 const loadBookSuggestions = async () =>
-    await fetch("https://bookstry20191122022423.azurewebsites.net/api/book")
+    await fetch("https://bookstry20191122022423.azurewebsites.net/api/book/")
         .then(res => (res.ok ? res : Promise.reject(res)))
         .then(res => res.json())
 
@@ -24,7 +24,7 @@ export default function BookSuggestionsBar() {
                 <Row>
                     <Col>
                         <h4>Suggestions:</h4>
-                        <div style={{ backgroundColor: "#A9A9A9", marginTop: "10px" }}>
+                        <div style={{ backgroundColor: "#fff", marginTop: "10px", borderLeft: "1px solid lightgrey"}}>
                             {data.map(suggestedBook =>
                                 <div style={{ textAlign: "center" }}>
                                     <img

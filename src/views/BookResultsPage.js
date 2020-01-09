@@ -98,6 +98,7 @@ export default class BookResultsPage extends React.Component {
                         <Col sm="4">
                         </Col>
                     </Row>
+
                     <Row>
                         <Col sm="1">
                         </Col>
@@ -150,6 +151,7 @@ export default class BookResultsPage extends React.Component {
                                                     href="#pablo"
                                                     target="_blank"
                                                 >
+
                                                     SEE DETAILS </Button>
                                             </div>
                                         </div>
@@ -170,8 +172,10 @@ export default class BookResultsPage extends React.Component {
                     </Row>
                 </div>
                 <Footer />
+
             </div>
         );
 
     }
+
 }

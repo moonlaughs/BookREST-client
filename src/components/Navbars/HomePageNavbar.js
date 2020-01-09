@@ -10,8 +10,17 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Container
+  Container,
+  ButtonGroup,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledDropdown,
+  InputGroupAddon,
+  InputGroupText
 } from "reactstrap";
+
+import { Link } from "react-router-dom";
 
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -43,6 +52,57 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
+  let loginButton;
+  if (sessionStorage.getItem("loggedIn") === "1") {
+    loginButton = <>
+      <UncontrolledDropdown>
+        <DropdownToggle
+          aria-expanded={false}
+          aria-haspopup={true}
+          caret
+          color="primary"
+          data-toggle="dropdown"
+          id="dropdownMenuButton"
+          type="button"
+        >
+          My Account
+        </DropdownToggle>
+        <DropdownMenu aria-labelledby="dropdownMenuButton" style={{ marginTop: "15px" }}>
+          <DropdownItem onClick={e => window.location.href("/my-bookshelf")}>
+            My Bookshelf
+          </DropdownItem>
+          <DropdownItem onClick={e => window.location.href("/my-orders")}>
+            My Orders
+          </DropdownItem>
+          <DropdownItem onClick={e => window.location.href("/my-profile")}>
+            Settings
+          </DropdownItem>
+          <DropdownItem href="/home-page" onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
+            Log out
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <Link onClick={e => window.location.href("/cart-page")}
+      >
+        <InputGroupAddon addonType="append">
+          <InputGroupText>
+            <i className="nc-icon nc-cart-simple" />
+          </InputGroupText>
+        </InputGroupAddon>
+      </Link>
+    </>
+
+  }
+  else {
+    loginButton = <Button
+      className="btn-round"
+      color="primary"
+      href="http://localhost:3000/tabs"
+    >
+      LOGIN
+  </Button>
+  }
 
   return (
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg">
@@ -95,7 +155,7 @@ function IndexNavbar() {
                 color="primary"
                 href="http://localhost:3000/tabs"
               >
-                Login
+                {loginButton}
               </Button>
             </NavItem>
           </Nav>

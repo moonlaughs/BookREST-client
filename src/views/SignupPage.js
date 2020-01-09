@@ -137,6 +137,7 @@ export default class SignupPage extends React.Component {
       pass2: document.getElementById("pass2").value
     };
 
+
      if (data.pass.value === data.pass2.value) {
       fetch(url, {
         method: "POST",
@@ -147,6 +148,7 @@ export default class SignupPage extends React.Component {
         }
       });
       console.log(JSON.stringify(data));
+
       alert("You successfully created an account");
       window.location.reload();
      }
