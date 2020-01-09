@@ -1,7 +1,7 @@
 import React from "react";
 import ChangePasswordButton from "views/ChangePasswordButton.js";
 import DeleteAccountButton from "views/DeleteAccountButton.js";
-import { Card, Input, Button } from "reactstrap";
+import { Input, Button } from "reactstrap";
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -112,17 +112,14 @@ export default class EditProfile extends React.Component {
     var { person } = this.state;
 
     return (
-      <div>
-        <Card className="card-register">
-          <form
+          <form className="editForm"
             id="form"
             method="post"
             name="userRegistrationForm"
             onSubmit={this.submituserRegistrationForm}
-            style={{ width: "250px" }}
           >
             <h6>Full name</h6>
-            <Input
+            <Input className="nameInput"
               type="text"
               id="fullName"
               name="fullName"
@@ -132,7 +129,7 @@ export default class EditProfile extends React.Component {
             <div className="errorMsg">{this.state.errors.fullName}</div>
 
             <h6>Email</h6>
-            <Input
+            <Input className="emailInput"
               type="text"
               id="email"
               name="email"
@@ -148,15 +145,11 @@ export default class EditProfile extends React.Component {
               block
               type="submit"
               color="success"
-              className="btn-round"
-              // size="sm"
               onClick={this.confirmEditInfo.bind(this)}
             >
               Save changes
             </Button>
           </form>
-        </Card>
-      </div>
     );
   }
 }
