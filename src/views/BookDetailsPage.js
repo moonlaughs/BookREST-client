@@ -228,7 +228,7 @@ export default class BookDetailsPage extends React.Component {
                                         <label className={bookLabel} style={{ margin: "0px 0px 20px 0px" }}>{this.state.book.genre}</label>
                                         <h5>{this.state.book.bookDes}</h5>
                                         <p style={{ margin: "20px 0px 0px 0px" }}><strong>Author: </strong>{this.state.book.author}</p>
-                                        <p><strong>Price: </strong>{this.state.book.price}</p>
+                                        <p><strong>Price: €</strong>{this.state.book.price}</p>
                                     </div>
                                 </Col>
                             </Row>
