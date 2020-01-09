@@ -144,7 +144,7 @@ export default class BookDetailsPage extends React.Component {
   
   async addReview() {
         if (sessionStorage.getItem("loggedIn") === "1") {
-            if (this.state.reviewText == "") {
+            if (this.state.reviewText !== "") {
                 const newReview = {
                     personId: localStorage.getItem('personId'),
                     bookId: this.state.bookId,
