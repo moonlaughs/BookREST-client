@@ -150,13 +150,7 @@ function IndexNavbar() {
               </NavLink>
             </NavItem>
             <NavItem>
-              <Button
-                className="btn-round"
-                color="primary"
-                href="http://localhost:3000/tabs"
-              >
-                {loginButton}
-              </Button>
+              {loginButton}
             </NavItem>
           </Nav>
         </Collapse>

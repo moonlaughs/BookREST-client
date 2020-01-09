@@ -8,7 +8,7 @@ import {
     Container
 } from "reactstrap";
 
-export default function DemoFooter() {
+export default function Footer() {
     return (
         <Navbar style={{ marginTop: "50px", textAlign: "center" }} className="bg-primary" expand="lg">
             <Container>
@@ -33,7 +33,7 @@ export default function DemoFooter() {
                       </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#pablo" onClick={e => e.preventDefault()}>
+                            <NavLink href="/disclaimer">
                                 <i
                                     aria-hidden={true}
                                     className="nc-icon nc-paper"

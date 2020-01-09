@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import {
     Row,
-    Col,
     Button
 } from "reactstrap";
 
@@ -10,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import DisclaimerBar from "components/Other/DisclaimerBar.js"
 import Footer from "components/Footers/Footer.js";
 
 export default class BookshelfPage extends Component {
@@ -50,6 +50,7 @@ export default class BookshelfPage extends Component {
                 <div>
                     <HomePageNavbar />
                     <HomePageHeader />
+                    <DisclaimerBar />
                     <div className="main" style={{ marginLeft: "10%", marginRight: "10%" }}>
                         <h3><strong>Your Bookshelf</strong></h3>
                         <Row>

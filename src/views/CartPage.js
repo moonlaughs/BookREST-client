@@ -8,6 +8,7 @@ import {
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import DisclaimerBar from "components/Other/DisclaimerBar.js"
 import Footer from "components/Footers/Footer.js";
 
 import PaymentButton from "./PaymentButton.js";
@@ -98,6 +99,7 @@ export default class CartPage extends Component {
                 <div>
                     <HomePageNavbar />
                     <HomePageHeader />
+                    <DisclaimerBar />
                     <div className="main" style={{ marginLeft: "20%", marginRight: "20%" }}>
                         <h2>Your Cart</h2>
                         <Row style={{ paddingTop: "2%", borderBottom: "2px solid lightgrey", }}>

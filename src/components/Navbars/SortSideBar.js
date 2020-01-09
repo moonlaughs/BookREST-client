@@ -24,7 +24,7 @@ export default function SortSideBar() {
 
 return (
         <div>
-            <Row>
+          {/*  <Row>
                 <Col>
                     <Label>Prices:</Label>
                     <div className="form-check-radio">
@@ -58,7 +58,7 @@ return (
                         </Label>
                     </div>
                 </Col>
-            </Row>
+          </Row> */}
             <Row style={{ height: "35px" }}></Row>
             <Row>
                 <Col>

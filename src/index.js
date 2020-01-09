@@ -26,13 +26,13 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import "assets/css/bootstrap.min.css";
 import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
-// pages
+// example pages
 import Index from "views/Index.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/template/examples/LandingPage.js";
 import ProfilePage from "views/template/examples/ProfilePage.js";
 import RegisterPage from "views/template/examples/RegisterPage.js";
-// others
+// our pages
 import HomePage from "views/HomePage.js";
 import BookResultsPage from "views/BookResultsPage.js"
 import BookDetailsPage from "views/BookDetailsPage.js";
@@ -45,6 +45,7 @@ import Tabs from "views/Tabs.js";
 import MyTabs from 'views/MyTabs';
 import AboutUs from 'views/AboutUs.js';
 import ContactUs from 'views/ContactUs.js';
+import Disclaimer from 'views/Disclaimer.js';
 import OrdersHistoryPage from 'views/OrdersHistoryPage';
 import BookshelfPage from 'views/BookshelfPage';
 
@@ -102,7 +103,7 @@ ReactDOM.render(
         render={props => <Tabs {...props} />}
       />
       <Route
-        path="/my-profile/:id"
+        path="/my-profile"
         render={props => <MyProfilePage {...props} />}
       />
       <Route
@@ -116,6 +117,10 @@ ReactDOM.render(
       <Route
         path="/contact-us"
         render={props => <ContactUs {...props} />}
+      />
+      <Route
+        path="/disclaimer"
+        render={props => <Disclaimer {...props} />}
       />
       <Route
       path="/my-orders"

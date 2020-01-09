@@ -8,7 +8,7 @@ function IndexHeader() {
         className="page-header section-dark"
         style={{
           backgroundImage:
-            "url(" + require("assets/img/cover5.jpg") + ")",
+            "url(" + require("assets/img/cover4.jpg") + ")",
           marginTop: "100px",
           minHeight: "400px"
         }}

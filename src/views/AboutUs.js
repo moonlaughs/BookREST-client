@@ -8,6 +8,7 @@ import {
 
 import HomePageNavbar from "components/Navbars/HomePageNavbar.js";
 import HomePageHeader from "components/Headers/HomePageHeader.js";
+import DisclaimerBar from "components/Other/DisclaimerBar.js"
 import SearchBar from "components/Other/SearchBar.js"
 import SortSideBar from "components/Navbars/SortSideBar.js";
 import BookSuggestionsBar from "components/Navbars/BookSuggestionsBar.js";
@@ -35,6 +36,7 @@ export default class AboutUs extends React.Component {
             <div>
                 <HomePageNavbar />
                 <HomePageHeader />
+                <DisclaimerBar />
                 <div className="main">
 
                     <SearchBar />
