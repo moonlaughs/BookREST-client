@@ -83,7 +83,7 @@ function IndexNavbar() {
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
-      <Link onClick={e => window.location.href("/my-cart")}
+      <Link onClick={e => window.location.href("/cart-page")}
       >
         <InputGroupAddon addonType="append">
           <InputGroupText>
