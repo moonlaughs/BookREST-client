@@ -30,7 +30,7 @@
     "compile-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css",
     "minify-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/paper-kit.scss src/assets/css/paper-kit.css --source-map true",
-    "staging": "concurrently -k  \"npm:staging-server\" \"cross-env REACT_APP_ENVIRONMENT='staging' PORT=3000 react-scripts start\""
+    "staging": "concurrently -k  \"npm:staging-server\" \"cross-env REACT_APP_ENVIRONMENT='staging' PORT=3000 node index.js\""
   },
   "eslintConfig": {
     "extends": "react-app"
