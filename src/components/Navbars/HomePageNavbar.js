@@ -4,13 +4,7 @@ import classnames from "classnames";
 // reactstrap components
 import {
   Button,
-  Collapse,
-  NavbarBrand,
   Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
@@ -68,21 +62,21 @@ function IndexNavbar() {
               My Account
         </DropdownToggle>
             <DropdownMenu aria-labelledby="dropdownMenuButton">
-              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-bookshelf")}>
-                My Bookshelf
+              <DropdownItem onClick={e => e.preventDefault()} style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-bookshelf">My Bookshelf</Link>
           </DropdownItem>
-              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-orders")}>
-                My Orders
+              <DropdownItem onClick={e => e.preventDefault()}  style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-orders">My Orders</Link>
           </DropdownItem>
-              <DropdownItem onClick={e => e.preventDefault()} onClick={e => window.location.href("/my-profile")}>
-                Settings
+              <DropdownItem onClick={e => e.preventDefault()}  style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-profile">Settings</Link>
           </DropdownItem>
-              <DropdownItem href="/home-page" onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
-                Log out
+              <DropdownItem style={{backgroundColor: "#fff", color: "black"}} onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/home-page">Log out</Link>
           </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
-          <Link onClick={e => window.location.href("/cart-page")}>
+          <Link to="/cart-page">
             <img alt="..."
               style={{ height: "30px", width: "30px", align: "center", marginLeft: "10px" }}
               src={require("assets/img/shopping-cart.png")}
@@ -106,7 +100,7 @@ function IndexNavbar() {
 
       <Row style={{ width: "100%" }}>
         <Col md="2" style={{ textAlign: "center" }}>
-          <Link onClick={e => window.location.href("/home-page")}>
+          <Link to="/home-page">
             <img alt="..."
               style={{ height: "50px", width: "50px", align: "center" }}
               src={require("assets/img/Logo pic.png")}
@@ -114,7 +108,7 @@ function IndexNavbar() {
           </Link>
         </Col>
         <Col md="8" style={{ textAlign: "center" }}>
-          <Link onClick={e => window.location.href("/home-page")}>
+          <Link to="/home-page">
             <img alt="..."
               style={{ height: "75px", width: "150px" }}
               src={require("assets/img/Logo name.png")}

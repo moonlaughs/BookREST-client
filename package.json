@@ -50,5 +50,6 @@
   "optionalDependencies": {
     "typescript": "3.5.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "homepage": "."
 }
