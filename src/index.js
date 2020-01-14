@@ -21,13 +21,14 @@ import 'react-app-polyfill/stable';
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import "./web.config";
 
 // styles
 import "assets/css/bootstrap.min.css";
 import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 // example pages
-import Index from "views/Index.js";
+//import Index from "views/Index.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/template/examples/LandingPage.js";
 import ProfilePage from "views/template/examples/ProfilePage.js";

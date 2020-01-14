@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/1d444110-11b3-49a4-925c-b72d730e581f/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/BooksREST",
+    "appService.deploySubpath": "build"
+}
