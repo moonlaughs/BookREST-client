@@ -28,7 +28,7 @@ export default function BookSuggestionsBar() {
                         <div style={{ backgroundColor: "#fff", marginTop: "10px", borderLeft: "1px solid lightgrey" }}>
                             {data.map(suggestedBook =>
                                 <Link to={`/book-details-page/${suggestedBook.bookId}`}>
-                                    <div style={{ textAlign: "center" }}>
+                                    <div style={{ textAlign: "center" }} onClick={() => window.location.reload()}>
                                         <img
                                             alt="..."
                                             className="img-thumbnail img-responsive"
