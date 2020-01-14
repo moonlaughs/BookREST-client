@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAsync } from 'react-async';
 import { Link } from "react-router-dom";
 
@@ -27,7 +27,7 @@ export default function BookSuggestionsBar() {
                         <h4>Suggestions:</h4>
                         <div style={{ backgroundColor: "#fff", marginTop: "10px", borderLeft: "1px solid lightgrey" }}>
                             {data.map(suggestedBook =>
-                                <Link  onClick={e => window.location.href(`/book-details-page/${suggestedBook.bookId}`)}>
+                                <Link to={`/book-details-page/${suggestedBook.bookId}`}>
                                     <div style={{ textAlign: "center" }}>
                                         <img
                                             alt="..."
