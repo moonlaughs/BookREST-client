@@ -21,6 +21,7 @@ import 'react-app-polyfill/stable';
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import "./web.config";
 
 // styles
 import "assets/css/bootstrap.min.css";
