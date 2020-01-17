@@ -1,5 +1,5 @@
 import React from "react";
-
+import QuotesHeader from "components/Navbars/QuotesHeader";
 
 function IndexHeader() {
   return (
@@ -8,11 +8,11 @@ function IndexHeader() {
         className="page-header section-dark"
         style={{
           backgroundImage:
-            "url(" + require("assets/img/cover4.jpg") + ")",
+            "url(" + require("assets/img/croppedPhoto.jpg") + ")",
           marginTop: "100px",
           minHeight: "400px"
         }}
-      >
+      > <QuotesHeader/>
       </div>
     </>
   );

@@ -1,0 +1,73 @@
+/* center the blockquote in the page */
+.blockquote-wrapper {
+  display: flex;
+  margin-left: 55%;
+  height: 50px;
+  padding: 0 20px;
+}
+
+/* Blockquote main style */
+.blockquote {
+  position: relative;
+  font-family: "Barlow Condensed", cursive;
+  max-width: 300px;
+  margin: 80px auto;
+  align-self: center;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+  font-family: "Barlow Condensed", cursive;
+  position: relative;
+  color: black;
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0;
+  border: 2px solid #51bcda;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+/* Blockquote right double quotes */
+.blockquote h1:after {
+  content: "";
+  position: absolute;
+  border: 2px solid #51bcda;
+  border-radius: 0 50px 0 0;
+  width: 60px;
+  height: 60px;
+  bottom: -62px;
+  left: 50px;
+  border-bottom: none;
+  border-left: none;
+  z-index: 3;
+}
+
+.blockquote h1:before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  border: 6px solid #51bcda;
+  bottom: -3px;
+  left: 50px;
+  z-index: 2;
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+  position: relative;
+  color: black;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  padding-top: 15px;
+  z-index: 1;
+  margin-left: 150px;
+  padding-left: 12px;
+}
+
+.blockquote h4:first-letter {
+  margin-left: -12px;
+}

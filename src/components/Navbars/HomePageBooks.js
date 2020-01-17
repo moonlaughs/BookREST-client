@@ -18,6 +18,7 @@ export default function HomePageBooks() {
     if (isLoading) return "Loading..."
     if (error) return `Something went wrong: ${error.message}`
     if (data)
+    
 
         return (
             <div>
