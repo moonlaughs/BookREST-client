@@ -49,6 +49,7 @@ import ContactUs from 'views/ContactUs.js';
 import Disclaimer from 'views/Disclaimer.js';
 import OrdersHistoryPage from 'views/OrdersHistoryPage';
 import BookshelfPage from 'views/BookshelfPage';
+import AdminPanel from 'views/AdminPanel';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -130,6 +131,10 @@ ReactDOM.render(
       <Route
       path="/my-bookshelf"
       render={props => <BookshelfPage {...props} />}
+      />
+      <Route
+      path="/adminpanel"
+      render={props => <AdminPanel {...props} />}
       />
       <Redirect to="/home-page" />
     </Switch>

@@ -45,16 +45,18 @@ export default class LoginPage extends React.Component {
           if (response.type === 1) {
 
             sessionStorage.setItem('loggedIn', JSON.stringify(1));
+            sessionStorage.setItem('admin', JSON.stringify(false));
 
             localStorage.setItem('personId', JSON.stringify(response.personId));
 
             window.location.href = `/home-page/`//${localStorage.getItem('personId')}`;
 
           } else if (response.type === 2) {
-            alert("Hello admin");
             sessionStorage.setItem('loggedIn', JSON.stringify(1));
+            sessionStorage.setItem('admin', JSON.stringify(true));
 
             localStorage.setItem('personId', JSON.stringify(response.personId));
+            alert("Hello admin");
             window.location.href = `/home-page/`
           }
         }

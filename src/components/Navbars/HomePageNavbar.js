@@ -48,7 +48,49 @@ function IndexNavbar() {
 
   let loginButton;
   if (sessionStorage.getItem("loggedIn") === "1") {
-    loginButton = <>
+
+    if(sessionStorage.getItem("admin") === "true"){
+      loginButton = <>
+          <UncontrolledDropdown style={{display: "inline-block"}}>
+            <DropdownToggle
+              aria-expanded={false}
+              aria-haspopup={true}
+              caret
+              color="primary"
+              data-toggle="dropdown"
+              id="dropdownMenuButton"
+              type="button"
+            >
+              My Account
+        </DropdownToggle>
+            <DropdownMenu aria-labelledby="dropdownMenuButton">
+              <DropdownItem onClick={e => e.preventDefault()}  style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/adminpanel">Admin Panel</Link>
+          </DropdownItem>
+              <DropdownItem onClick={e => e.preventDefault()} style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-bookshelf">My Bookshelf</Link>
+          </DropdownItem>
+              <DropdownItem onClick={e => e.preventDefault()}  style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-orders">My Orders</Link>
+          </DropdownItem>
+              <DropdownItem onClick={e => e.preventDefault()}  style={{backgroundColor: "#fff", color: "black"}}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/my-profile">Settings</Link>
+          </DropdownItem>
+              <DropdownItem style={{backgroundColor: "#fff", color: "black"}} onClick={e => e.preventDefault()} onClick={() => sessionStorage.setItem("loggedIn", 0)}>
+                <Link style={{backgroundColor: "#fff", color: "black"}} to="/home-page">Log out</Link>
+          </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          <Link to="/cart-page">
+            <img alt="..."
+              style={{ height: "30px", width: "30px", align: "center", marginLeft: "10px" }}
+              src={require("assets/img/shopping-cart.png")}
+            />
+          </Link>
+    </>
+    }
+    else{
+      loginButton = <>
           <UncontrolledDropdown style={{display: "inline-block"}}>
             <DropdownToggle
               aria-expanded={false}
@@ -83,6 +125,8 @@ function IndexNavbar() {
             />
           </Link>
     </>
+    }
+    
 
   }
   else {
