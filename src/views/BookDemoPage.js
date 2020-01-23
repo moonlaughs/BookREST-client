@@ -5,6 +5,8 @@ import {
     Button,
     Row,
     Col,
+    Alert,
+    Container
 } from "reactstrap";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -47,6 +49,23 @@ export default class ReadBookPage extends Component {
     render() {
         const { numPages, pageNumber } = this.state;
 
+        let payToReadFullBookNotification;
+        if (this.state.pageNumber >= this.state.numPages - (this.state.numPages - 5)) {
+            payToReadFullBookNotification = <Alert
+                className="alert-with-icon"
+                color="warning"
+                style={{ marginBottom: "10px", textAlign: "center", width: "90%"}}
+            >
+                
+                    <div className="alert-wrapper">
+                        <div className="message">
+                            <i className="nc-icon nc-bell-55" /> Please purchase the book to enjoy it entirely :)
+                        </div>
+                    </div>
+            
+            </Alert>
+        }
+
         return (
             <div>
                 <Row>
@@ -82,6 +101,7 @@ export default class ReadBookPage extends Component {
                     </Col>
                     <Col sm="3">
                         <div style={{ textAlign: "center", padding: "400px 0px" }}>
+                        {payToReadFullBookNotification}
                             <Button
                                 disabled={pageNumber >= numPages - (numPages - 5)}
                                 onClick={this.nextPage}>

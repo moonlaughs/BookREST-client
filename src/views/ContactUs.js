@@ -17,17 +17,6 @@ import Footer from "components/Footers/Footer.js";
 export default class ContactUs extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            books: [],
-            bookSearchKeyword: ""
-        };
-    }
-
-    componentDidMount() {
-        fetch('https://bookstry20191122022423.azurewebsites.net/api/book')
-            .then(response => response.json())
-            .then(data => this.setState({ books: data }));
     }
 
     render() {

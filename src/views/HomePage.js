@@ -18,11 +18,6 @@ import HomePageBooks2 from "components/Navbars/HomePageBooks2.js";
 export default class HomePage extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            books: [],
-            bookSearchKeyword: ""
-        };
     }
 
     render() {

@@ -53,6 +53,14 @@ export default class BookResultsPage extends React.Component {
             .then(data => this.setState({ books: data }));
     }
 
+    handleEnterNavigation(e) {
+        var code = e.keyCode || e.which;
+        if (code === 13) {
+            this.handleKeywordSearchChange();
+        }
+
+    }
+
     render() {
         let noBooksAlert;
         if (!this.state.books.length) {
@@ -60,22 +68,12 @@ export default class BookResultsPage extends React.Component {
                 className="alert-with-icon"
                 color="warning"
             >
-                <Container>
-                    <div className="alert-wrapper">
-                        <button
-                            type="button"
-                            className="close"
-                            data-dismiss="alert"
-                            aria-label="Close"
-                        >
-                            <i className="nc-icon nc-simple-remove" />
-                        </button>
-                        <div className="message">
-                            <i className="nc-icon nc-bell-55" /> There were no books found with this keyword. Try again and make sure" +
-                             "the book's title and/or author name are spelled correctly. :)
+                <div className="alert-wrapper" style={{ padding: "0 8px" }}>
+                    <div className="message" style={{ color: "black" }}>
+                        <i className="nc-icon nc-bell-55" style={{ color: "black" }} /> There were no books found with this keyword. Try again and make sure
+                         the book's title and/or author name are spelled correctly. :)
                 </div>
-                    </div>
-                </Container>
+                </div>
             </Alert>
         }
 
@@ -90,7 +88,9 @@ export default class BookResultsPage extends React.Component {
                         </Col>
                         <Col sm="4">
                             <InputGroup>
-                                <Input style={{ height: "55px" }} placeholder="Search" type="text" onChange={e => this.setState({ bookSearchKeyword: e.target.value })} />
+                                <Input style={{ height: "55px" }} placeholder="Search" type="text"
+                                    onChange={e => this.setState({ bookSearchKeyword: e.target.value })}
+                                    onKeyPress={this.handleEnterNavigation.bind(this)} />
                                 <InputGroupAddon addonType="append">
                                     <InputGroupText>
                                         <Button onClick={this.handleKeywordSearchChange.bind(this)}>

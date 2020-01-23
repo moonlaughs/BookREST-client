@@ -20,12 +20,12 @@ export default function HomePageBooks2() {
     if (data)
 
         return (
-            <div>
+            <div style={{height: "358px", width: "100%", overflow: "hidden" }}>
                 <h3>Recommended fantasy books:</h3>
                 <div style={{
                     backgroundColor: "#A9A9A9",
-                    width: "100%", height: "310px",
-                    overflowX: "scroll", overflowY: "hidden",
+                    width: "100%", height: "320px",
+                    overflowX: "auto", overflowY: "hidden",
                     whiteSpace: "nowrap"
                 }}>
                     {data.map(book =>
