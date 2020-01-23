@@ -22,10 +22,21 @@ export default function SearchBar() {
 
     function handleNavigation() {
         console.log("KW: " + bookKeyword)
-        if(bookKeyword !== "") {
-            history.push({pathname:"/book-results-page", state: {bookSearchKeyword: bookKeyword}})
-        }        
+        if (bookKeyword !== "") {
+            history.push({ pathname: "/book-results-page", state: { bookSearchKeyword: bookKeyword } })
+        }         
     }
+
+    function handleEnterNavigation(e) {
+        console.log("KW: " + bookKeyword)
+        var code = e.keyCode || e.which;
+        if (code === 13) { 
+            if (bookKeyword !== "") {
+                history.push({ pathname: "/book-results-page", state: { bookSearchKeyword: bookKeyword } })
+            }
+        }
+
+    } 
 
     return (
         <div>
@@ -34,7 +45,9 @@ export default function SearchBar() {
                 </Col>
                 <Col sm="4">
                     <InputGroup>
-                        <Input style={{ height: "55px" }} placeholder="Search" type="text" onChange={e => handleBookKeywordChange(e)} />
+                        <Input style={{ height: "55px" }} placeholder="Search" type="text"
+                            onChange={e => handleBookKeywordChange(e)}
+                            onKeyPress={handleEnterNavigation.bind(this)} />
                         <InputGroupAddon addonType="append">
                             <InputGroupText>
                                 <Button onClick={handleNavigation.bind(this)}>

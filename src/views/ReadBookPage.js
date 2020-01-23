@@ -5,6 +5,10 @@ import {
     Button,
     Row,
     Col,
+    Input,
+    InputGroup,
+    Label,
+    Alert
 } from "reactstrap";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -44,8 +48,38 @@ export default class ReadBookPage extends Component {
 
     nextPage = () => this.changePage(1);
 
+    handlePageNumberChange = toPage => {
+        if (toPage < this.state.pageNumber) {
+            for (let i = 0; i < (this.state.pageNumber - toPage); i++) {
+                this.changePage(-1)
+            }
+        }
+        else if (toPage > this.state.pageNumber) {
+            for (let i = 0; i < (toPage - this.state.pageNumber); i++) {
+                this.changePage(1)
+            }
+        }
+    }
+
     render() {
         const { numPages, pageNumber } = this.state;
+
+        let invalidBookPageNotification;
+        if (this.state.pageNumber < 1 || this.state.pageNumber > this.state.numPages) {
+            invalidBookPageNotification = <Alert
+                className="alert-with-icon"
+                color="warning"
+                style={{ marginBottom: "10px", textAlign: "center", width: "90%"}}
+            >
+                
+                    <div className="alert-wrapper">
+                        <div className="message">
+                            <i className="nc-icon nc-bell-55" /> Please choose a page number from 1 to {this.state.numPages}
+                        </div>
+                    </div>
+            
+            </Alert>
+        }
 
         return (
             <div>
@@ -64,6 +98,16 @@ export default class ReadBookPage extends Component {
                         </div>
                     </Col>
                     <Col sm="6">
+                        <div style={{ width: "30%", margin: "15px auto" }}>
+                            <Label>Search by page number: </Label>
+                            <InputGroup style={{ marginLeft: "10px", width: "55px", display: "inline-block" }}>
+                                <Input style={{ height: "35px", width: "50px", display: "inline-block" }}
+                                    placeholder={this.state.pageNumber} type="text"
+                                    onChange={e => this.handlePageNumberChange(e.target.value)} />
+                            </InputGroup>
+                            <Label>/{this.state.numPages}</Label>
+                        </div>
+                        {invalidBookPageNotification}
                         <React.Fragment>
                             <div style={{ textAlign: "center", width: "950px" }}>
                                 <Document
@@ -71,7 +115,7 @@ export default class ReadBookPage extends Component {
                                     onLoadSuccess={this.onDocumentLoadSuccess}
                                 >
                                     <Page pageNumber={pageNumber} width="950" />
-                              </Document> 
+                                </Document>
                             </div>
                             <div style={{ textAlign: "center" }}>
                                 <p>
@@ -91,13 +135,6 @@ export default class ReadBookPage extends Component {
                                     className="nc-icon nc-minimal-right"
                                 />
                             </Button>
-                            {/*  <i
-                                style={{ fontSize: "3em" }}
-                                aria-hidden={true}
-                                className="nc-icon nc-minimal-right"
-                                disabled={pageNumber >= numPages}
-                                onClick={this.nextPage}
-                          /> */}
                         </div>
                     </Col>
                 </Row>
