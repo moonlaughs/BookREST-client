@@ -43,7 +43,7 @@ export default class AdminUsers extends React.Component {
     }
 
     deleteAccount(myPersonId) {
-        if (window.confirm("Are you sure you want to delete your account?")) {
+        if (window.confirm("Are you sure you want to delete this account?")) {
           fetch(
             `https://bookstry20191122022423.azurewebsites.net/api/person/delAccount/` + myPersonId,
             {
